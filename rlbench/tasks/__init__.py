@@ -101,6 +101,8 @@ from rlbench.tasks.take_tray_out_of_oven import TakeTrayOutOfOven
 from rlbench.tasks.take_umbrella_out_of_umbrella_stand import \
     TakeUmbrellaOutOfUmbrellaStand
 from rlbench.tasks.take_usb_out_of_computer import TakeUsbOutOfComputer
+from rlbench.tasks.teodor_reach_target import TeodorReachTarget
+from rlbench.tasks.teodor_reach_cube import TeodorReachCube
 from rlbench.tasks.toilet_seat_down import ToiletSeatDown
 from rlbench.tasks.toilet_seat_up import ToiletSeatUp
 from rlbench.tasks.turn_oven_on import TurnOvenOn
