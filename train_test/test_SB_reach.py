@@ -3,10 +3,10 @@ import rlbench.gym
 from stable_baselines3 import A2C
 
 # Create environment
-env = gym.make('reach_target-state-v0', render_mode='human')
+env = gym.make('teodor_reach_target-state-v0', render_mode='human')
 
 # Load the trained agent
-model = A2C.load("reach_target")
+model = A2C.load("teodor_reach_target")
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
