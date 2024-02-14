@@ -38,7 +38,7 @@ class Environment(object):
                  visual_randomization_config: VisualRandomizationConfig = None,
                  dynamics_randomization_config: DynamicsRandomizationConfig = None,
                  attach_grasped_objects: bool = True,
-                 shaped_rewards: bool = False
+                 shaped_rewards: bool = True
                  ):
 
         self._dataset_root = dataset_root

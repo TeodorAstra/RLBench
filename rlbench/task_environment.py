@@ -32,7 +32,7 @@ class TaskEnvironment(object):
                  obs_config: ObservationConfig,
                  static_positions: bool = False,
                  attach_grasped_objects: bool = True,
-                 shaped_rewards: bool = False
+                 shaped_rewards: bool = True
                  ):
         self._pyrep = pyrep
         self._robot = robot
