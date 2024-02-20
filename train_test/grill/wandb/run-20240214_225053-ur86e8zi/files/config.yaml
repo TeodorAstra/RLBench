@@ -1,0 +1,200 @@
+wandb_version: 1
+
+policy_type:
+  desc: null
+  value: MlpPolicy
+total_timesteps:
+  desc: null
+  value: 500000
+env_id:
+  desc: null
+  value: <OrderEnforcing<RLBenchEnv<close_grill-state-v0>>>
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.12
+    cli_version: 0.16.3
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1707947453.360839
+    t:
+      1:
+      - 1
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 3
+      - 16
+      - 22
+      - 23
+      - 35
+      4: 3.10.12
+      5: 0.16.3
+      8:
+      - 5
+      13: linux-x86_64
+algo:
+  desc: null
+  value: A2C
+policy_class:
+  desc: null
+  value: <class 'stable_baselines3.common.policies.ActorCriticPolicy'>
+device:
+  desc: null
+  value: cpu
+verbose:
+  desc: null
+  value: 1
+policy_kwargs:
+  desc: null
+  value: '{''optimizer_class'': <class ''torch.optim.rmsprop.RMSprop''>, ''optimizer_kwargs'':
+    {''alpha'': 0.99, ''eps'': 1e-05, ''weight_decay'': 0}}'
+num_timesteps:
+  desc: null
+  value: 0
+_total_timesteps:
+  desc: null
+  value: 500000
+_num_timesteps_at_start:
+  desc: null
+  value: 0
+seed:
+  desc: null
+  value: None
+action_noise:
+  desc: null
+  value: None
+start_time:
+  desc: null
+  value: 1707947454211565974
+learning_rate:
+  desc: null
+  value: 0.0007
+tensorboard_log:
+  desc: null
+  value: runs/ur86e8zi
+_last_obs:
+  desc: null
+  value: "[[ 1.0000000e+00 -2.8610229e-05 -2.4461746e-03  1.8119812e-04\n   2.4318695e-03\
+    \ -1.2874603e-04 -5.5313110e-04  2.3841858e-05\n  -9.2947466e-06  1.7556980e-01\
+    \  9.8082119e-06 -8.7320226e-01\n   8.4689727e-06  1.2213664e+00  7.8539073e-01\
+    \  3.1861946e-02\n   2.3859409e+01 -6.7416206e-04 -1.6203465e+01 -1.3883552e-01\n\
+    \  -4.3502254e+00  3.2397307e-02  2.7865335e-01 -8.1632826e-03\n   1.4715761e+00\
+    \ -6.7379068e-07  9.9271536e-01 -3.4847303e-06\n   1.2048337e-01  3.9995365e-02\
+    \  4.0007070e-02  1.7862022e-03\n  -4.3471754e-04 -3.5390258e-06  1.7855465e-03\
+    \  4.3499173e-04\n   4.0665268e-06  2.1721801e-01 -1.2101662e-01  7.5199986e-01\n\
+    \   0.0000000e+00  0.0000000e+00  6.1328316e-01  7.8986317e-01\n   2.4199480e-01\
+    \ -2.4134584e-02  9.0667963e-01  0.0000000e+00\n   0.0000000e+00  9.9217588e-01\
+    \  1.2484810e-01  2.4056807e-01\n  -2.9962670e-02  8.8052636e-01 -4.3120486e-01\
+    \  5.6036848e-01\n   5.6042403e-01 -4.3124753e-01  3.7762761e-01  3.8346447e-02\n\
+    \   1.0454195e+00 -2.1242899e-01 -6.7170483e-01 -3.6540452e-02\n  -7.0876747e-01\
+    \  0.0000000e+00  3.1776077e-01 -1.9104746e-01\n   1.0736628e+00  5.3286660e-01\
+    \  4.1529182e-01  5.8493036e-01\n  -4.4882336e-01  3.6437911e-01 -5.6979217e-02\
+    \  1.0246764e+00\n   8.8298447e-02  7.0157510e-01  8.8297755e-02 -7.0156920e-01\n\
+    \   3.7166598e-01  1.9364914e-02  1.1768721e+00 -4.3155694e-01\n  -5.6350416e-01\
+    \  2.7357361e-01  6.4913732e-01  3.5243848e-01\n  -5.2310139e-02  1.2648507e+00\
+    \  1.2444790e-01  9.7690469e-01\n   1.7177516e-01  2.5756568e-02  3.7528622e-01\
+    \  3.2092400e-02\n   1.1577747e+00 -4.3083605e-01 -5.6406420e-01  2.7264792e-01\n\
+    \   6.4951909e-01  3.5082623e-01 -6.9308192e-02  1.3024642e+00\n   1.2444789e-01\
+    \  9.7690469e-01  1.7177509e-01  2.5756726e-02\n   3.5438466e-01 -4.5011818e-02\
+    \  1.2459285e+00 -4.7655392e-01\n  -5.2602065e-01  3.2602707e-01  6.2442380e-01]]"
+_last_episode_starts:
+  desc: null
+  value: '[ True]'
+_last_original_obs:
+  desc: null
+  value: None
+_episode_num:
+  desc: null
+  value: 0
+use_sde:
+  desc: null
+  value: 'False'
+sde_sample_freq:
+  desc: null
+  value: -1
+_current_progress_remaining:
+  desc: null
+  value: 1.0
+_stats_window_size:
+  desc: null
+  value: 100
+ep_info_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+ep_success_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+_n_updates:
+  desc: null
+  value: 0
+_custom_logger:
+  desc: null
+  value: 'False'
+env:
+  desc: null
+  value: <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7f23fcea6860>
+_vec_normalize_env:
+  desc: null
+  value: None
+observation_space:
+  desc: null
+  value: Box(-inf, inf, (115,), float32)
+action_space:
+  desc: null
+  value: Box(-1.0, 1.0, (8,), float32)
+n_envs:
+  desc: null
+  value: 1
+n_steps:
+  desc: null
+  value: 5
+gamma:
+  desc: null
+  value: 0.99
+gae_lambda:
+  desc: null
+  value: 1.0
+ent_coef:
+  desc: null
+  value: 0.0
+vf_coef:
+  desc: null
+  value: 0.5
+max_grad_norm:
+  desc: null
+  value: 0.5
+rollout_buffer_class:
+  desc: null
+  value: <class 'stable_baselines3.common.buffers.RolloutBuffer'>
+rollout_buffer_kwargs:
+  desc: null
+  value: '{}'
+normalize_advantage:
+  desc: null
+  value: 'False'
+lr_schedule:
+  desc: null
+  value: <function constant_fn.<locals>.func at 0x7f2421656dd0>
+rollout_buffer:
+  desc: null
+  value: <stable_baselines3.common.buffers.RolloutBuffer object at 0x7f23fcea6950>
+policy:
+  desc: null
+  value: "ActorCriticPolicy(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (pi_features_extractor): FlattenExtractor(\n\
+    \    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (vf_features_extractor):\
+    \ FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (mlp_extractor):\
+    \ MlpExtractor(\n    (policy_net): Sequential(\n      (0): Linear(in_features=115,\
+    \ out_features=64, bias=True)\n      (1): Tanh()\n      (2): Linear(in_features=64,\
+    \ out_features=64, bias=True)\n      (3): Tanh()\n    )\n    (value_net): Sequential(\n\
+    \      (0): Linear(in_features=115, out_features=64, bias=True)\n      (1): Tanh()\n\
+    \      (2): Linear(in_features=64, out_features=64, bias=True)\n      (3): Tanh()\n\
+    \    )\n  )\n  (action_net): Linear(in_features=64, out_features=8, bias=True)\n\
+    \  (value_net): Linear(in_features=64, out_features=1, bias=True)\n)"
+_logger:
+  desc: null
+  value: <stable_baselines3.common.logger.Logger object at 0x7f23fce22d10>

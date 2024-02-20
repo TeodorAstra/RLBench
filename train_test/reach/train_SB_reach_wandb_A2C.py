@@ -39,7 +39,7 @@ model.learn(
     
 )
 
-model.save("reach_target_A2C_VecNorm")
+model.save("reach_target_Shapeingym_VecNom")
 
 wandb.finish()
 # Load the trained agent

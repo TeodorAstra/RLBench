@@ -12,7 +12,7 @@ env = gym.make('slide_block_to_target-state-v0', render_mode=None)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 20000,
+    "total_timesteps": 1000000,
     "env_id": env,
 }
 run = wandb.init(
@@ -33,7 +33,7 @@ model.learn(
     
 )
 
-model.save("slide_block_to_target_PPO_shapetest")
+model.save("slide_block_to_target_PPO_shape_1m")
 
 # Load the trained agent
 #model = A2C.load("A2C_grilling")

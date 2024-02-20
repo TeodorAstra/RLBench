@@ -8,11 +8,13 @@ from wandb.integration.sb3 import WandbCallback
 
 # Create environment
 env = gym.make('reach_target-state-v0', render_mode=None)
+#env._max_episode_steps = 1000
+
 
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 100000,
+    "total_timesteps": 225000,
     "env_id": env,
 }
 run = wandb.init(
@@ -23,7 +25,7 @@ run = wandb.init(
     # save_code=True,  # optional
 )
 
-model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}",)
+model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps = 150)
 model.learn(
     total_timesteps=config["total_timesteps"],
     callback=WandbCallback(
@@ -33,7 +35,7 @@ model.learn(
     
 )
 
-model.save("reach_target_PPO_shape_1")
+model.save("reach_target_PPO_Rollback_square_reward_225k")
 
 
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)

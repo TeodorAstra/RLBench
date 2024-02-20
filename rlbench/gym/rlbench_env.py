@@ -35,7 +35,7 @@ class RLBenchEnv(gym.Env):
 
         action_mode = MoveArmThenGripper(JointVelocity(), Discrete())
         self.env = Environment(
-            action_mode, obs_config=obs_config, headless=True)
+            action_mode, obs_config=obs_config, headless=True, shaped_rewards=True)
         self.env.launch()
         self.task = self.env.get_task(task_class)
 

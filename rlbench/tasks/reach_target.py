@@ -51,5 +51,6 @@ class ReachTarget(Task):
         return True
 
     def reward(self) -> float:
-        return -np.linalg.norm(self.target.get_position() -
-                               self.robot.arm.get_tip().get_position())
+        #return -np.linalg.norm(self.target.get_position() - self.robot.arm.get_tip().get_position())
+        return -(np.linalg.norm(self.target.get_position() - self.robot.arm.get_tip().get_position()))**2
+     

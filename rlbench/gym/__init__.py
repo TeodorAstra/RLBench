@@ -16,7 +16,8 @@ for task_file in TASKS:
         kwargs={
             'task_class': task_class,
             'observation_mode': 'state'
-        }
+        },
+        max_episode_steps=15
     )
     register(
         id='%s-vision-v0' % task_name,

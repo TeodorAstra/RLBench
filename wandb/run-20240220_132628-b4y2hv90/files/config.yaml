@@ -1,0 +1,33 @@
+wandb_version: 1
+
+policy_type:
+  desc: null
+  value: MlpPolicy
+total_timesteps:
+  desc: null
+  value: 22500
+env_id:
+  desc: null
+  value: <TimeLimit<RLBenchEnv<reach_target-state-v0>>>
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.12
+    cli_version: 0.16.3
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1708431988.289709
+    t:
+      1:
+      - 1
+      - 55
+      3:
+      - 16
+      - 23
+      - 35
+      4: 3.10.12
+      5: 0.16.3
+      8:
+      - 5
+      13: linux-x86_64
