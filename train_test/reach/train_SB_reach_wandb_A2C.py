@@ -11,14 +11,14 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 # Create environment
 env = gym.make('reach_target-state-v0', render_mode=None)
 
-env = DummyVecEnv([lambda: env])  # Wrap the environment in a DummyVecEnv
+#env = DummyVecEnv([lambda: env])  # Wrap the environment in a DummyVecEnv
 
 # Tip from SB3: Normalize observations and rewards
-env = VecNormalize(env, norm_obs=True, norm_reward=True)
+#env = VecNormalize(env, norm_obs=True, norm_reward=True)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 100000,
+    "total_timesteps": 22500,
     "env_id": env,
 }
 run = wandb.init(
@@ -29,7 +29,7 @@ run = wandb.init(
     # save_code=True,  # optional
 )
 
-model = A2C(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}")
+model = A2C(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=150)
 model.learn(
     total_timesteps=config["total_timesteps"],
     callback=WandbCallback(
@@ -39,7 +39,7 @@ model.learn(
     
 )
 
-model.save("reach_target_Shapeingym_VecNom")
+model.save("reach_target_A2C_n_steps_150")
 
 wandb.finish()
 # Load the trained agent

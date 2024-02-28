@@ -1,0 +1,12 @@
+program: train.py
+method: bayes
+metric:
+  name: mean_reward
+  goal: maximize
+parameters:
+  ent_coef:
+    min: 0.001
+    max: 0.1
+  clip_range:
+    min: 0
+    max: 1

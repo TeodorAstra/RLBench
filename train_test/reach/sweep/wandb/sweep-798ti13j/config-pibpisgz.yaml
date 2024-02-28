@@ -1,0 +1,6 @@
+wandb_version: 1
+
+clip_range:
+  value: 0
+ent_coef:
+  value: 0.07497697569566626

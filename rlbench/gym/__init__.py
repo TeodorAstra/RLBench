@@ -27,3 +27,17 @@ for task_file in TASKS:
             'observation_mode': 'vision'
         }
     )
+
+
+#____________________CUSTOM_ max_episode_steps_______________________________
+    
+
+register(
+        id='slide_block_to_target-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('slide_block_to_target'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=30
+    )

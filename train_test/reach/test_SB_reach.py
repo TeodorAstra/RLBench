@@ -1,42 +1,31 @@
-import gym
 import rlbench.gym
+import gym
 from stable_baselines3 import A2C
 from stable_baselines3 import PPO
 
 #from stable_baselines3.common.evaluation import evaluate_policy
 
 # Create environment
-env = gym.make('reach_target-state-v0', render_mode=None)
+env = gym.make('reach_target-state-v0', render_mode="human")
 
 # Load the trained agent
-model = PPO.load("reach_target_PPO_Rollback_square_reward", print_system_info=True)
-
-# Evaluate the agent
-#mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
-
-obs = env.reset()
-
-"""
-while True:
-    action, _states = model.predict(obs)
-    obs, rewards, dones, info = env.step(action)
-    print(rewards)
+model = PPO.load("reach_target_PPO_shaping_n_steps_150_ent_coef_0.01_clip_range_0.8_45k", print_system_info=True)
 
 
-"""    
 
-
-training_steps = 45
+training_steps = 120
 episode_length = 15
 for i in range(training_steps):
     if i % episode_length == 0:
         print('Reset Episode')
-        #obs = env.reset()
-
-    #action, _states = model.predict(obs, deterministic=True) #Deterministic for A2C
-    action, _states = model.predict(obs)
-    #obs, reward, terminate, _ = env.step(action)
-    obs, reward, terminate, _ = env.step(env.action_space.sample())
-
+        obs = env.reset()
+    action, _states = model.predict(obs, deterministic=True)
+    obs, reward, terminate, _ = env.step(action)
     print(reward)
     #env.render()  # Note: rendering increases step time.
+    if terminate:
+        print('Episode Terminated. Resetting...')
+        obs = env.reset()
+
+print('Done')
+env.close()

@@ -15,6 +15,7 @@ CUSTOM_TASKS = [t for t in os.listdir(CUSTOM_TASKS_PATH)
 for task_file in CUSTOM_TASKS:
     task_name = task_file.split('.py')[0]
     task_class = name_to_task_class(task_name)
+    #print(task_class)
     register(
         id='%s-state-v0' % task_name,
         entry_point='rlbench.gym:RLBenchEnv',

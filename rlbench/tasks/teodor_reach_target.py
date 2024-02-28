@@ -31,27 +31,23 @@ class TeodorReachTarget(Task):
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
         return [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
 
-    """
+    
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.array(self.target.get_position())
-    """
+    
         
     def is_static_workspace(self) -> bool:
         return True
 
     def reward(self) -> float:
-        return -np.linalg.norm(self.target.get_position() -
+        shaping_reward =  -np.linalg.norm(self.target.get_position() -
                                self.robot.arm.get_tip().get_position())
+
+        if DetectedCondition(self.robot.arm.get_tip(), ProximitySensor('success')).condition_met()[0]:
+            return 100 #Returns 10 for success
+
+        return shaping_reward
     
         
-  
-    
-    """
-    def step(self, action: any): #-> Tuple[np.ndarray, float, bool, Dict]:
-        obs =  self.get_low_dim_state 
-        reward = self.reward 
-        done = False
-     
-        return  obs, 2, done, {}
-    """
+

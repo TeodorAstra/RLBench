@@ -32,7 +32,7 @@ class TaskEnvironment(object):
                  obs_config: ObservationConfig,
                  static_positions: bool = False,
                  attach_grasped_objects: bool = True,
-                 shaped_rewards: bool = True
+                 shaped_rewards: bool = False
                  ):
         self._pyrep = pyrep
         self._robot = robot
@@ -100,8 +100,9 @@ class TaskEnvironment(object):
         self._action_mode.action(self._scene, action)
         success, terminate = self._task.success()
         reward = float(success)
+        #reward = 10*float(success)
         if self._shaped_rewards:
-            reward = self._task.reward()
+            reward = self._task.reward() # + reward #Edit by Teodor
             if reward is None:
                 raise RuntimeError(
                     'User requested shaped rewards, but task %s does not have '

@@ -14,6 +14,8 @@ class SlideBlockToTarget(Task):
         self._target = ProximitySensor('success')
         self.register_success_conditions([
             DetectedCondition(self._block, self._target)])
+        self.subgoal_achieved = False
+        self.old_block_to_target = 0
 
     def init_episode(self, index: int) -> List[str]:
         self._variation_index = index
@@ -26,6 +28,9 @@ class SlideBlockToTarget(Task):
 
     def variation_count(self) -> int:
         return 1
+    
+    def is_static_workspace(self) -> bool:
+        return True
 
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
@@ -35,6 +40,42 @@ class SlideBlockToTarget(Task):
     def reward(self) -> float:
         grip_to_block = -np.linalg.norm(
             self._block.get_position() - self.robot.arm.get_tip().get_position())
-        block_to_target = -np.linalg.norm(
+        block_to_target = np.linalg.norm(
             self._block.get_position() - self._target.get_position())
-        return grip_to_block + block_to_target
+        
+        block_velocity = np.linalg.norm(self._block.get_velocity()[0]) #Get linear velocity
+
+        new_block_to_target = block_to_target
+
+        closer_to_target_reward = 0
+        if (new_block_to_target < self.old_block_to_target):
+            closer_to_target_reward = 200
+            self.old_block_to_target = new_block_to_target
+
+        block_velocity_reward = 0
+        if block_velocity > 0:
+            block_velocity_reward = 100
+
+        #Introduce Sub-goal Rewards
+        subgoal_reward = 0
+        CLOSE_PROXIMITY = 0.15
+        if not self.subgoal_achieved and (np.linalg.norm(self._block.get_position() - self.robot.arm.get_tip().get_position()) < CLOSE_PROXIMITY):
+            subgoal_reward = 500  # Reward for achieving the subgoal
+            self.subgoal_achieved = True  # Mark subgoal as achieved for this episode
+
+        if self.success()[0]:
+            return 1000
+
+        """
+        if DetectedCondition(self._block, self._target).condition_met()[0]:
+            return 1000 # For successfull task
+        """
+        total_reward = (
+            grip_to_block +
+            #10*block_to_target +
+            closer_to_target_reward +
+            block_velocity_reward +
+            subgoal_reward
+        )
+        
+        return total_reward
