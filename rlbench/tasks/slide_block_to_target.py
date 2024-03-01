@@ -50,7 +50,9 @@ class SlideBlockToTarget(Task):
         closer_to_target_reward = 0
         if (new_block_to_target < self.old_block_to_target):
             closer_to_target_reward = 200
-            self.old_block_to_target = new_block_to_target
+        
+        self.old_block_to_target = new_block_to_target        
+
 
         block_velocity_reward = 0
         if block_velocity > 0:
@@ -72,10 +74,10 @@ class SlideBlockToTarget(Task):
         """
         total_reward = (
             grip_to_block +
-            #10*block_to_target +
+            -1*block_to_target +
             closer_to_target_reward +
-            block_velocity_reward +
-            subgoal_reward
+            block_velocity_reward 
+            #subgoal_reward
         )
         
         return total_reward

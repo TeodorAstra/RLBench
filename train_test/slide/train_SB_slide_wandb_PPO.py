@@ -14,7 +14,7 @@ env = gym.make('slide_block_to_target-state-v0', render_mode=None)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 45000,
+    "total_timesteps": 720000,
     "env_id": env,
 }
 run = wandb.init(
