@@ -56,7 +56,7 @@ class SlideBlockToTarget(Task):
 
         block_velocity_reward = 0
         if block_velocity > 0:
-            block_velocity_reward = 100
+            block_velocity_reward = 10
 
         #Introduce Sub-goal Rewards
         subgoal_reward = 0
@@ -65,17 +65,19 @@ class SlideBlockToTarget(Task):
             subgoal_reward = 500  # Reward for achieving the subgoal
             self.subgoal_achieved = True  # Mark subgoal as achieved for this episode
 
-        if self.success()[0]:
-            return 1000
 
         """
+        if self.success()[0]:
+            return 1000
+        """
+
         if DetectedCondition(self._block, self._target).condition_met()[0]:
             return 1000 # For successfull task
-        """
+    
         total_reward = (
             grip_to_block +
-            -1*block_to_target +
-            closer_to_target_reward +
+            -5*block_to_target +
+            #closer_to_target_reward +
             block_velocity_reward 
             #subgoal_reward
         )
