@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Tuple, Dict
 
 import numpy as np
 from pyrep.objects.shape import Shape
 from pyrep.objects.proximity_sensor import ProximitySensor
 from rlbench.backend.task import Task
 from rlbench.backend.conditions import DetectedCondition
+
 
 
 class SlideBlockToTarget(Task):
@@ -36,7 +37,20 @@ class SlideBlockToTarget(Task):
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
             self._block.get_position(), self._target.get_position()])
+    
+    """
+    def step(self, action) -> Tuple[Dict[str, np.ndarray], float, bool, dict]:
+        obs, reward, terminate = self.task.step(action)
+        is_success = DetectedCondition(self._block, self._target).condition_met()[0]
+        info = {'is_success': is_success}
+        return self._extract_obs(obs), reward, terminate, {}
 
+    def step(self) -> None:
+        is_success = DetectedCondition(self._block, self._target).condition_met()[0]
+        info = {'is_success': is_success}
+        return info
+    """
+    
     def reward(self) -> float:
         grip_to_block = -np.linalg.norm(
             self._block.get_position() - self.robot.arm.get_tip().get_position())
@@ -56,7 +70,7 @@ class SlideBlockToTarget(Task):
 
         block_velocity_reward = 0
         if block_velocity > 0:
-            block_velocity_reward = 10
+            block_velocity_reward = 1
 
         #Introduce Sub-goal Rewards
         subgoal_reward = 0
@@ -76,7 +90,7 @@ class SlideBlockToTarget(Task):
     
         total_reward = (
             grip_to_block +
-            -5*block_to_target +
+            -50*block_to_target +
             #closer_to_target_reward +
             block_velocity_reward 
             #subgoal_reward
