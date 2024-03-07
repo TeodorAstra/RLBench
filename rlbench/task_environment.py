@@ -100,14 +100,13 @@ class TaskEnvironment(object):
         self._action_mode.action(self._scene, action)
         success, terminate = self._task.success()
         reward = float(success)
-        #reward = 10*float(success)
         if self._shaped_rewards:
             reward = self._task.reward() # + reward #Edit by Teodor
             if reward is None:
                 raise RuntimeError(
                     'User requested shaped rewards, but task %s does not have '
                     'a defined reward() function.' % self._task.get_name())
-        return self._scene.get_observation(), reward, terminate
+        return self._scene.get_observation(), reward, terminate, success #Success was added by Teodor
 
     def get_demos(self, amount: int, live_demos: bool = False,
                   image_paths: bool = False,

@@ -48,8 +48,8 @@ model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=
 def is_task_successful(info):
 # Check if the episode terminated before a certain number of steps
     return info['steps'] < 30
-"""
 
+"""
 class CustomWandbCallback(WandbCallback):
     def __init__(self, *args, **kwargs):
         super(CustomWandbCallback, self).__init__(*args, **kwargs)
@@ -59,38 +59,37 @@ class CustomWandbCallback(WandbCallback):
         result = super()._on_step()
 
         # Access local variables using self.locals
-        total_successes = sum(info.get('is_success') for info in self.locals.get('infos', []))
-        success_rate = total_successes / len(self.locals.get('infos', []))
+        total_successes = sum(info.get('is_successful', False) for info in self.locals.get('info', []))
+        success_rate = total_successes / (config["n_steps"]/30) # 30 is the max episode length of the task
         wandb.log({"Success Rate": success_rate})
 
         return result
 """
 
 class CustomWandbCallback(WandbCallback):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, n_steps=100, *args, **kwargs):
         super(CustomWandbCallback, self).__init__(*args, **kwargs)
         self.n_steps = config["n_steps"]
-        self.episode_lengths = []
-
+        self.successful_steps = []
+    
     def _on_step(self) -> bool:
         # Call parent method
         result = super()._on_step()
 
         # Access local variables using self.locals
-        episode_lengths = self.locals.get('episode_lengths', [])
-        self.episode_lengths.extend(episode_lengths)
+        info = self.locals.get('info', {})
+        is_successful = info.get('is_successful', False)
+        
+        # Add the success/failure of the current step to the list
+        self.successful_steps.append(is_successful)
+        
+        # Keep only the last n_steps in the list
+        if len(self.successful_steps) > self.n_steps:
+            self.successful_steps = self.successful_steps[-self.n_steps:]
 
-        # Calculate the percentage of episodes shorter than 30 steps
-        short_episodes = sum(1 for length in episode_lengths if length < 30)
-        total_episodes = len(self.episode_lengths)
-        percentage_short_episodes = (short_episodes / total_episodes) * 100
-
-        # Log the percentage of short episodes
-        wandb.log({"Percentage of Episodes Shorter Than 30 Steps": percentage_short_episodes})
-
-        # Reset episode lengths every n_steps
-        if self.num_timesteps % self.n_steps == 0:
-            self.episode_lengths = []
+        # Calculate success rate for the last n_steps
+        success_rate = sum(self.successful_steps) / len(self.successful_steps) if self.successful_steps else 0
+        wandb.log({"Success Rate (Last {} Steps)".format(self.n_steps): success_rate})
 
         return result
 
@@ -105,7 +104,7 @@ model.learn(
 )
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"slide_block_to_target_{current_datetime}"
+filename = f"slide_block_to_target_custom_callback{current_datetime}"
 model.save(filename)
 
 run.finish()

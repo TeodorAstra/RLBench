@@ -49,8 +49,17 @@ class SlideBlockToTarget(Task):
         is_success = DetectedCondition(self._block, self._target).condition_met()[0]
         info = {'is_success': is_success}
         return info
-    """
+
+   
+    #Overriden step function to ad additional info regarding successfull tasks
+    def step(self, action) -> Tuple[Dict[str, np.ndarray], float, bool, dict]:
+        obs, reward, terminate = self.task.step(action)
+        #is_successful = DetectedCondition(self._block, self._target).condition_met()[0]  # Call a method to determine if the task is successful
+        is_successful, = self.task.success()
+        info = {'is_successful': is_successful}
+        return self._extract_obs(obs), reward, terminate, info
     
+    """    
     def reward(self) -> float:
         grip_to_block = -np.linalg.norm(
             self._block.get_position() - self.robot.arm.get_tip().get_position())

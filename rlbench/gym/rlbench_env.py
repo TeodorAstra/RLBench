@@ -103,9 +103,17 @@ class RLBenchEnv(gym.Env):
         del descriptions  # Not used.
         return self._extract_obs(obs)
 
+    #Original Step
+    """ 
     def step(self, action) -> Tuple[Dict[str, np.ndarray], float, bool, dict]:
         obs, reward, terminate = self.task.step(action)
         return self._extract_obs(obs), reward, terminate, {}
+    """
+    #Modified Step
+    def step(self, action) -> Tuple[Dict[str, np.ndarray], float, bool, dict]:
+        obs, reward, terminate, success = self.task.step(action)
+        info = {'is_successful': success}
+        return self._extract_obs(obs), reward, terminate, info
 
     def close(self) -> None:
         self.env.shutdown()
