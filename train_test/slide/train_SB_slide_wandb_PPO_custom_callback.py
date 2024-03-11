@@ -3,12 +3,21 @@ import rlbench.gym
 from stable_baselines3 import PPO
 import wandb
 from wandb.integration.sb3 import WandbCallback
+from stable_baselines3.common.callbacks import BaseCallback
 import datetime
 import os
-
+from stable_baselines3.common.monitor import Monitor
+from custom_wandb_callback import CustomWandbCallback
 
 # Create environment
 env = gym.make('slide_block_to_target-state-v0', render_mode=None)
+
+#env = Monitor(my_env, directory="logs", info_keywords=("is_success",))
+
+# Wrap the environment with MonitorWithInfo
+#env = MonitorWithInfo(my_env, info_keywords=("is_success",))
+#env = Monitor(env, "./logs", info_keywords=("is_success",))
+
 
 task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/slide_block_to_target.py"
 
@@ -28,9 +37,9 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 900,
+    "total_timesteps": 2000000,
     "env_id": env,
-    "n_steps": 90
+    "n_steps": 180
 }
 run = wandb.init(
     project="slide_block_to_target_PPO",
@@ -45,53 +54,6 @@ run.log_artifact(task_code_artifact)
 
 model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"]) #n_steps=180)
 
-def is_task_successful(info):
-# Check if the episode terminated before a certain number of steps
-    return info['steps'] < 30
-
-"""
-class CustomWandbCallback(WandbCallback):
-    def __init__(self, *args, **kwargs):
-        super(CustomWandbCallback, self).__init__(*args, **kwargs)
-
-    def _on_step(self) -> bool:
-        # Call parent method
-        result = super()._on_step()
-
-        # Access local variables using self.locals
-        total_successes = sum(info.get('is_successful', False) for info in self.locals.get('info', []))
-        success_rate = total_successes / (config["n_steps"]/30) # 30 is the max episode length of the task
-        wandb.log({"Success Rate": success_rate})
-
-        return result
-"""
-
-class CustomWandbCallback(WandbCallback):
-    def __init__(self, n_steps=100, *args, **kwargs):
-        super(CustomWandbCallback, self).__init__(*args, **kwargs)
-        self.n_steps = config["n_steps"]
-        self.successful_steps = []
-    
-    def _on_step(self) -> bool:
-        # Call parent method
-        result = super()._on_step()
-
-        # Access local variables using self.locals
-        info = self.locals.get('info', {})
-        is_successful = info.get('is_successful', False)
-        
-        # Add the success/failure of the current step to the list
-        self.successful_steps.append(is_successful)
-        
-        # Keep only the last n_steps in the list
-        if len(self.successful_steps) > self.n_steps:
-            self.successful_steps = self.successful_steps[-self.n_steps:]
-
-        # Calculate success rate for the last n_steps
-        success_rate = sum(self.successful_steps) / len(self.successful_steps) if self.successful_steps else 0
-        wandb.log({"Success Rate (Last {} Steps)".format(self.n_steps): success_rate})
-
-        return result
 
 # Create Wandb callback instance
 
@@ -100,6 +62,7 @@ model.learn(
     callback=CustomWandbCallback(
     model_save_path=f"models/{run.id}",
     verbose=2,
+    log="all",
     ),
 )
 

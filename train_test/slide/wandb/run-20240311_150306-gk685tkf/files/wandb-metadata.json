@@ -1,0 +1,80 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-03-11T14:03:06.898778",
+    "startedAt": "2024-03-11T14:03:06.277193",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/slide/train_SB_slide_wandb_PPO_custom_callback.py",
+    "codePathLocal": "train_SB_slide_wandb_PPO_custom_callback.py",
+    "codePath": "train_test/slide/train_SB_slide_wandb_PPO_custom_callback.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "9716dacf99233ef3e705173977b97f2c05eb478d"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "LAPTOP-CD2EC9DM",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1992.0,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.0,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 13.621826171875
+        }
+    },
+    "memory": {
+        "total": 3.779277801513672
+    }
+}

@@ -112,7 +112,7 @@ class RLBenchEnv(gym.Env):
     #Modified Step
     def step(self, action) -> Tuple[Dict[str, np.ndarray], float, bool, dict]:
         obs, reward, terminate, success = self.task.step(action)
-        info = {'is_successful': success}
+        info = {'is_success': success}
         return self._extract_obs(obs), reward, terminate, info
 
     def close(self) -> None:
