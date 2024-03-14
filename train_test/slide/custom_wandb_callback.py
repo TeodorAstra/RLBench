@@ -67,9 +67,12 @@ class CustomWandbCallback(BaseCallback):
                 self.model_save_freq == 0
             ), "to use the `model_save_freq` you have to set the `model_save_path` parameter"
 
-        self.successes = 0
+        #self.successes = 0
         self.step_counter = 0
         self.success_rate = 0
+
+        self.episode_counter = 0
+        self.successfull_episodes = 0
 
     def _init_callback(self) -> None:
         d = {}
@@ -90,18 +93,30 @@ class CustomWandbCallback(BaseCallback):
             )
         wandb.config.setdefaults(d)
 
-    #Step function modified to keep track of successes
+    #Step function modified to keep track of successfull episodes and episodes
     def _on_step(self) -> bool:
         super()._on_step()
         if self.model_save_freq > 0:
             if self.model_save_path is not None:
                 if self.n_calls % self.model_save_freq == 0:
                     self.save_model()
-        
+        """
         if self.locals['infos'][0]['is_success']: #is_success added to the dict in step in rlbench_env.py
             self.successes += 1
+            self.episode_counter += 1
+            self.step_counter += 1
+        else:
+            self.step_counter +=1
+        """
         
-        self.step_counter +=1
+        if self.locals['dones'][0]:
+            self.episode_counter += 1
+
+            if self.locals['infos'][0]['is_success']:
+                self.successfull_episodes += 1
+        
+   
+
         return True
 
     def _on_training_end(self) -> None:
@@ -118,26 +133,30 @@ class CustomWandbCallback(BaseCallback):
     def _on_rollout_end(self) -> None:
         
         self._wandblog_success_rate()
-        #self._update_success_rate()
+
+        #Some debug prints
         """
+        locals = self.locals
         info = self.locals['infos']
         success = info[0]['is_success']
-        print(info)
+        print(locals)
         print(success)
         """
+
     #Calculates and logs the successrate
     def _wandblog_success_rate(self) -> None:
-        if self.step_counter != 0:
+        if self.episode_counter != 0:
         # Calculate success rate
-            success_rate = self.successes / self.step_counter
+            success_rate = self.successfull_episodes / self.episode_counter
         else:
         # Set success rate to zero if step_counter is zero
             success_rate = 0
-        wandb.log({"Success_rate": success_rate})
+        wandb.log({"success_rate": success_rate})
 
-        self.successes = 0
-        self.step_counter = 0
+        self.successfull_episodes = 0
+        self.episode_counter = 0
 
+    """
     def _update_success_rate(self) -> None:
         if self.step_counter != 0:
         # Calculate success rate
@@ -148,4 +167,4 @@ class CustomWandbCallback(BaseCallback):
        
         self.successes = 0
         self.step_counter = 0
-
+    """

@@ -1,5 +1,5 @@
-#import gym
 import gym
+#import gymnasium as gym
 import rlbench.gym
 from stable_baselines3 import PPO
 import wandb
@@ -8,13 +8,18 @@ from stable_baselines3.common.callbacks import BaseCallback
 import datetime
 import os
 from stable_baselines3.common.monitor import Monitor
+import shimmy
 from gym.wrappers import Monitor as GymMonitor
 
 # Create environment
-my_env = gym.make('slide_block_to_target-state-v0', render_mode=None)
-env = Monitor(my_env, "./logs", info_keywords=("is_success",))
+env = gym.make('slide_block_to_target-state-v0', render_mode=None)
+#env = Monitor(env, "./logs", info_keywords=("is_success",))
+env = shimmy.GymV21CompatibilityV0(env=env)
 
-print("Action space after Monitor wrapper:", env.action_space)
+#print("Action space after Monitor wrapper:", env.)
+print(type(env.action_space))
+env.reset()
+print(env.step(env.action_space.sample()))
 
 task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/slide_block_to_target.py"
 
@@ -43,14 +48,14 @@ run = wandb.init(
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
     monitor_gym=True,  # auto-upload the videos of agents playing the game
-     #save_code=True,  # optional
+    #save_code=True,  # optional
 )
 
 # Log the artifact to the run
 run.log_artifact(task_code_artifact)
-
+print(type(env.action_space))
 model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"]) #n_steps=180)
-
+print(type(env.action_space))
 # Create Wandb callback instance
 
 model.learn(

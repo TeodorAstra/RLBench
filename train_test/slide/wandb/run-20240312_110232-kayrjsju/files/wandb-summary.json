@@ -1,0 +1,1 @@
+{"Success_rate": 0, "_timestamp": 1710237761.0890348, "_runtime": 8.15506887435913, "_step": 210, "_wandb": {"runtime": 9}, "global_step": 180, "rollout/ep_len_mean": 30.0, "rollout/ep_rew_mean": -283.1925964355469, "time/fps": 25.0}

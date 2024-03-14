@@ -13,11 +13,7 @@ from custom_wandb_callback import CustomWandbCallback
 env = gym.make('slide_block_to_target-state-v0', render_mode=None)
 
 #env = Monitor(my_env, directory="logs", info_keywords=("is_success",))
-
-# Wrap the environment with MonitorWithInfo
-#env = MonitorWithInfo(my_env, info_keywords=("is_success",))
 #env = Monitor(env, "./logs", info_keywords=("is_success",))
-
 
 task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/slide_block_to_target.py"
 
@@ -45,7 +41,7 @@ run = wandb.init(
     project="slide_block_to_target_PPO",
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
-    monitor_gym=True,  # auto-upload the videos of agents playing the game
+    #monitor_gym=True,  # auto-upload the videos of agents playing the game
      #save_code=True,  # optional
 )
 
@@ -54,9 +50,7 @@ run.log_artifact(task_code_artifact)
 
 model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"]) #n_steps=180)
 
-
 # Create Wandb callback instance
-
 model.learn(
     total_timesteps=config["total_timesteps"],
     callback=CustomWandbCallback(

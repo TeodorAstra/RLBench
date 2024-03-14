@@ -61,33 +61,35 @@ class SlideBlockToTarget(Task):
     
     """    
     def reward(self) -> float:
+        #Distance rewards
         grip_to_block = -np.linalg.norm(
             self._block.get_position() - self.robot.arm.get_tip().get_position())
         block_to_target = np.linalg.norm(
             self._block.get_position() - self._target.get_position())
         
+        #Velocity reward
         block_velocity = np.linalg.norm(self._block.get_velocity()[0]) #Get linear velocity
-
-        new_block_to_target = block_to_target
-
-        closer_to_target_reward = 0
-        if (new_block_to_target < self.old_block_to_target):
-            closer_to_target_reward = 200
-        
-        self.old_block_to_target = new_block_to_target        
-
 
         block_velocity_reward = 0
         if block_velocity > 0:
             block_velocity_reward = 1
 
-        #Introduce Sub-goal Rewards
+        #Closer to target reward    
+        """
+        new_block_to_target = block_to_target
+        closer_to_target_reward = 0
+        if (new_block_to_target < self.old_block_to_target):
+            closer_to_target_reward = 200
+        self.old_block_to_target = new_block_to_target        
+        """
+    
+
+        #Sub-goal Rewards
         subgoal_reward = 0
         CLOSE_PROXIMITY = 0.15
         if not self.subgoal_achieved and (np.linalg.norm(self._block.get_position() - self.robot.arm.get_tip().get_position()) < CLOSE_PROXIMITY):
             subgoal_reward = 500  # Reward for achieving the subgoal
             self.subgoal_achieved = True  # Mark subgoal as achieved for this episode
-
 
         """
         if self.success()[0]:
