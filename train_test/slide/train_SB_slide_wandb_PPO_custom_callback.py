@@ -56,7 +56,7 @@ model.learn(
     callback=CustomWandbCallback(
     model_save_path=f"models/{run.id}",
     verbose=2,
-    log="all",
+    #log="all",
     ),
 )
 
