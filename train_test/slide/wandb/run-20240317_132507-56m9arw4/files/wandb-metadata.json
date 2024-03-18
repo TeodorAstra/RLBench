@@ -1,0 +1,60 @@
+{
+    "os": "Linux-6.5.0-25-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-03-17T12:25:09.659004",
+    "startedAt": "2024-03-17T12:25:07.102776",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/slide/train_SB_slide_wandb_PPO_custom_callback.py",
+    "codePathLocal": "train_SB_slide_wandb_PPO_custom_callback.py",
+    "codePath": "train_test/slide/train_SB_slide_wandb_PPO_custom_callback.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "adf526cc0a0446ae1c76b97345936394b4ea1379"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "Ubuntu",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 3392.142,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3392.142,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.142,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.142,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.142,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 250.16387557983398,
+            "used": 27.151016235351562
+        }
+    },
+    "memory": {
+        "total": 4.8503265380859375
+    }
+}
