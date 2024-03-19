@@ -35,7 +35,8 @@ config = {
     "policy_type": "MlpPolicy",
     "total_timesteps": 2000000,
     "env_id": env,
-    "n_steps": 180
+    "n_steps": 180,
+    "ent_coef": 0.01
 }
 run = wandb.init(
     project="slide_block_to_target_PPO",
@@ -48,7 +49,7 @@ run = wandb.init(
 # Log the artifact to the run
 run.log_artifact(task_code_artifact)
 
-model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"]) #n_steps=180)
+model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"]) #n_steps=180)
 
 # Create Wandb callback instance
 model.learn(
