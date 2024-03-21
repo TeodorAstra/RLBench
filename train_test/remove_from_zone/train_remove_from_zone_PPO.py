@@ -10,10 +10,10 @@ from stable_baselines3.common.monitor import Monitor
 from custom_wandb_callback import CustomWandbCallback
 
 # Create environment
-env = gym.make('teodor_remove_from_zone-state-v0', render_mode='human')
+env = gym.make('teodor_remove_from_zone-state-v0', render_mode=None)
 
-"""
-task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/slide_block_to_target.py"
+
+task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/teodor_remove_from_zone.py"
 
 # Check if the file exists
 if not os.path.exists(task_code_path):
@@ -27,19 +27,19 @@ task_code_artifact = wandb.Artifact("task_code", type="code")
 
 # Add the reward function file to the artifact
 task_code_artifact.add_file(task_code_path)
-"""
+
 
 config = {
     "policy_type": "MlpPolicy",
     "total_timesteps": 2000000,
     "env_id": env,
-    "n_steps": 180,
-    "ent_coef": 0.01
+    "n_steps": 90,
+    "ent_coef": 0.005
 }
 
-"""
+
 run = wandb.init(
-    project="slide_block_to_target_PPO",
+    project="teodor_remove_from_zone_PPO",
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
     #monitor_gym=True,  # auto-upload the videos of agents playing the game
@@ -48,24 +48,23 @@ run = wandb.init(
 
 # Log the artifact to the run
 run.log_artifact(task_code_artifact)
-"""
-model = PPO(config["policy_type"], config["env_id"], verbose=1, n_steps=config["n_steps"], ent_coef=config["ent_coef"]) 
-#model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"])
+
+#model = PPO(config["policy_type"], config["env_id"], verbose=1, n_steps=config["n_steps"], ent_coef=config["ent_coef"]) 
+model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"])
 
 # Create Wandb callback instance
 model.learn(
     total_timesteps=config["total_timesteps"],
-    #callback=CustomWandbCallback(
+    callback=CustomWandbCallback(
     #model_save_path=f"models/{run.id}",
     #verbose=2,
-    #),
+    ),
 )
 
-"""
+
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"slide_block_to_target_custom_callback{current_datetime}"
+filename = f"remove_from_zone_PPO{current_datetime}"
 model.save(filename)
 
 run.finish()
-"""
 
