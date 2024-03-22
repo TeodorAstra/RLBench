@@ -31,10 +31,10 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 2000000,
+    "total_timesteps": 300000,
     "env_id": env,
     "n_steps": 90,
-    "ent_coef": 0.005
+    "ent_coef": 0.001
 }
 
 

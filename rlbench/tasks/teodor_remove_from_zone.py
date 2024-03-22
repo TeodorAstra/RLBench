@@ -108,10 +108,10 @@ class TeodorRemoveFromZone(Task):
     
     def zone_distance_reward(self)->float:
         if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0]:
+            return  0 #No negative shaping if in zone
+        else:
             return -np.linalg.norm(
                 self.zone.get_position() - self.robot.arm.get_tip().get_position())
-        else:
-            return  0 #No negative shaping if in zone
         
     def gripper_movement_in_zone(self)->float:
         if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0]:
