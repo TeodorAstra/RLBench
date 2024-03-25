@@ -18,12 +18,6 @@ class TeodorRemoveFromZone(Task):
 
         self.zone = Shape('zone')
 
-        self.outside_zone = {
-            'cube1': False,
-            'cube2': False,
-            'cube3': False,
-        }
-
         self.spawn_boundary = Shape('spawn_boundary')
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
 
@@ -34,6 +28,12 @@ class TeodorRemoveFromZone(Task):
 
 
     def init_episode(self, index: int) -> List[str]:
+
+        self.outside_zone = {
+            'cube1': False,
+            'cube2': False,
+            'cube3': False,
+        }
         
         print("Start new ep")
         
@@ -95,7 +95,7 @@ class TeodorRemoveFromZone(Task):
         #reward for completed task
         total_reward = (gripper_to_zone + 
                         gripper_movement_in_zone +
-                        velocity_reward + 
+                        velocity_reward + #Causing issues when cubes spawn
                         exit_reward + 
                         task_complete_reward)
 
