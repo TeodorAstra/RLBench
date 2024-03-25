@@ -6,10 +6,10 @@ from stable_baselines3 import PPO
 #from stable_baselines3.common.evaluation import evaluate_policy
 
 # Create environment
-env = gym.make('teodor_remove_from_zone-state-v0', render_mode=None)
+env = gym.make('teodor_remove_from_zone-state-v0', render_mode='human')
 
 # Load the trained agent
-model = PPO.load("remove_from_zone_PPO20240322_2311", print_system_info=True)
+model = PPO.load("remove_from_zone_PPO20240325_1756", print_system_info=True)
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
