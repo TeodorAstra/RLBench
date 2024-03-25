@@ -129,7 +129,9 @@ class TeodorRemoveFromZone(Task):
         #print(cube_name)
 
         block_velocity_reward = 0
-        if block_velocity > 0 and not self.outside_zone[cube_name]: #Should not get velocity reward ones the cube has exited the zone
+        if (block_velocity > 0 and 
+            not self.outside_zone[cube_name] and 
+            DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0]): #Should not get velocity reward ones the cube has exited the zone
             block_velocity_reward = 1
 
         return block_velocity_reward
