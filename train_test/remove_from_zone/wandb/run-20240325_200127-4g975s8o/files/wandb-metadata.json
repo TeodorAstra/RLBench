@@ -1,0 +1,70 @@
+{
+    "os": "Linux-6.5.0-26-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-03-25T19:01:27.946815",
+    "startedAt": "2024-03-25T19:01:27.137760",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/remove_from_zone/train_remove_from_zone_PPO.py",
+    "codePathLocal": "train_remove_from_zone_PPO.py",
+    "codePath": "train_test/remove_from_zone/train_remove_from_zone_PPO.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "b27972be2690427a774405148a272bf4d2b82924"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "Ubuntu",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 6,
+    "cpu_count_logical": 6,
+    "cpu_freq": {
+        "current": 3392.146,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 250.16387557983398,
+            "used": 27.362598419189453
+        }
+    },
+    "memory": {
+        "total": 4.849819183349609
+    }
+}
