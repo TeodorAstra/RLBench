@@ -49,7 +49,7 @@ register(
             'task_class': name_to_task_class('teodor_remove_from_zone'),
             'observation_mode': 'state'
         },
-        max_episode_steps=30
+        max_episode_steps=40
     )
 register(
         id='teodor_remove_from_zone-vision-v0',
