@@ -72,7 +72,7 @@ class TeodorRemoveFromZone(Task):
     """        
     def reward(self) -> float:
 
-        self.close_tip_reward()
+        #self.close_tip_reward()
 
         #negative reward for grippers disntance to zone
         gripper_to_zone = self.zone_distance_reward()
