@@ -16,6 +16,10 @@ class TeodorRemoveFromZone(Task):
         self.cube2 = Shape('cube2')
         self.cube3 = Shape('cube3')
 
+        self.register_graspable_objects(self.cube1)
+        self.register_graspable_objects(self.cube2)
+        self.register_graspable_objects(self.cube3)
+
         self.zone = Shape('zone')
 
         self.spawn_boundary = Shape('spawn_boundary')
@@ -55,7 +59,7 @@ class TeodorRemoveFromZone(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
-            self.cube1.get_position(), self.cube2.get_position(), self.cube3.get_position(), self.zone.get_position()])
+            self.cube1.get_position(), self.cube2.get_position(), self.cube3.get_position(), self.zone.get_position(), self.in_zone_sensor.get_position()])
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
         return [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
