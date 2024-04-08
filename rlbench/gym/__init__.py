@@ -60,3 +60,13 @@ register(
         },
         max_episode_steps=30
     )
+
+register(
+        id='teodor_remove_from_zone_v2-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_remove_from_zone'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=40
+    )

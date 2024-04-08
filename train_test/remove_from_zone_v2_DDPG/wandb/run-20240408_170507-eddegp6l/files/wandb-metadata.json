@@ -1,0 +1,80 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-04-08T15:05:08.095619",
+    "startedAt": "2024-04-08T15:05:07.377255",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/remove_from_zone_v2_DDPG/train_remove_from_zone_v2_DDPG.py",
+    "codePathLocal": "train_remove_from_zone_v2_DDPG.py",
+    "codePath": "train_test/remove_from_zone_v2_DDPG/train_remove_from_zone_v2_DDPG.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "a2494bde99ddb7b608eb586b223579bdafd1ff8a"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "LAPTOP-CD2EC9DM",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1992.0050000000006,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1992.005,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 14.6302490234375
+        }
+    },
+    "memory": {
+        "total": 3.779277801513672
+    }
+}

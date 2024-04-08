@@ -3,12 +3,12 @@ from rlbench.backend.task import Task
 from pyrep.objects.shape import Shape
 from pyrep.objects.proximity_sensor import ProximitySensor
 from rlbench.backend.spawn_boundary import SpawnBoundary
-from rlbench.backend.conditions import DetectedCondition
+from rlbench.backend.conditions import DetectedCondition, GraspedCondition
 
 import numpy as np
 
 
-class TeodorRemoveFromZone(Task):
+class TeodorRemoveFromZoneV2(Task):
 
     def init_task(self) -> None:
         # TODO: This is called once when a task is initialised.
@@ -39,12 +39,13 @@ class TeodorRemoveFromZone(Task):
         
         print("Start new ep")
         
+        """
         b = SpawnBoundary([self.spawn_boundary])
 
         b.sample(self.cube1, min_distance=0.02)
         b.sample(self.cube2, min_distance=0.02)
         b.sample(self.cube3, min_distance=0.02)
-        
+        """
         return ['']
 
     def variation_count(self) -> int:
@@ -81,6 +82,9 @@ class TeodorRemoveFromZone(Task):
         
         #reward for end effector movement in zone. This to encourage interaction with the cubes
         gripper_movement_in_zone = self.gripper_movement_in_zone()
+
+        #reward for grasping a cube inside the zone
+        grasp_in_zone = self.grasped_in_zone_reward()
         
         #rewards movement of cube 
         v_r_1 = self.movement_reward(self.cube1)
@@ -100,6 +104,7 @@ class TeodorRemoveFromZone(Task):
         total_reward = (gripper_to_zone + 
                         gripper_movement_in_zone +
                         velocity_reward + #Causing issues when cubes spawn
+                        grasp_in_zone +
                         exit_reward + 
                         task_complete_reward)
 
@@ -161,3 +166,9 @@ class TeodorRemoveFromZone(Task):
         
     def close_tip_reward(self):
         print(self.robot.gripper.get_open_amount())
+
+    def grasped_in_zone_reward(self)->float:
+        if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0] and GraspedCondition.condition_met()[0]:
+            return 10
+        else:
+            return 0
