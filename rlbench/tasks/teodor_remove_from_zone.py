@@ -16,10 +16,8 @@ class TeodorRemoveFromZone(Task):
         self.cube2 = Shape('cube2')
         self.cube3 = Shape('cube3')
 
-        self.register_graspable_objects(self.cube1)
-        self.register_graspable_objects(self.cube2)
-        self.register_graspable_objects(self.cube3)
-
+        self.register_graspable_objects([self.cube1, self.cube2, self.cube3])
+      
         self.zone = Shape('zone')
 
         self.spawn_boundary = Shape('spawn_boundary')
