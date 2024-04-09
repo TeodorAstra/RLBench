@@ -1,0 +1,260 @@
+wandb_version: 1
+
+policy_type:
+  desc: null
+  value: MlpPolicy
+total_timesteps:
+  desc: null
+  value: 1000000
+env_id:
+  desc: null
+  value: <TimeLimit<RLBenchEnv<teodor_remove_from_zone-state-v0>>>
+n_steps:
+  desc: null
+  value: 200
+ent_coef:
+  desc: null
+  value: 0.01
+action_noise:
+  desc: null
+  value: NormalActionNoise(mu=[0. 0. 0. 0. 0. 0. 0. 0.], sigma=[0.1 0.1 0.1 0.1 0.1
+    0.1 0.1 0.1])
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.12
+    cli_version: 0.16.4
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1712590532.0
+    t:
+      1:
+      - 1
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 16
+      - 22
+      - 23
+      - 35
+      4: 3.10.12
+      5: 0.16.4
+      8:
+      - 5
+      13: linux-x86_64
+algo:
+  desc: null
+  value: DDPG
+policy_class:
+  desc: null
+  value: <class 'stable_baselines3.td3.policies.TD3Policy'>
+device:
+  desc: null
+  value: cpu
+verbose:
+  desc: null
+  value: 1
+policy_kwargs:
+  desc: null
+  value: '{''n_critics'': 1}'
+num_timesteps:
+  desc: null
+  value: 0
+_total_timesteps:
+  desc: null
+  value: 1000000
+_num_timesteps_at_start:
+  desc: null
+  value: 0
+seed:
+  desc: null
+  value: None
+start_time:
+  desc: null
+  value: 1712590564363899784
+learning_rate:
+  desc: null
+  value: 0.001
+tensorboard_log:
+  desc: null
+  value: runs/rty02k62
+_last_obs:
+  desc: null
+  value: "[[ 1.0000000e+00 -1.9073486e-05 -8.9168549e-04 -1.3351440e-04\n   1.0108948e-03\
+    \  2.3365021e-04  7.6770782e-04  3.1948090e-04\n  -6.1953051e-06  1.7530397e-01\
+    \ -1.8742976e-06 -8.7317914e-01\n   1.5144693e-05  1.2213309e+00  7.8539217e-01\
+    \  2.0922571e-02\n   2.3584339e+01 -1.5695443e-02 -1.6028656e+01 -1.4306518e-01\n\
+    \  -4.3119264e+00  2.8603423e-02  2.7856395e-01 -8.1587899e-03\n   1.4716978e+00\
+    \ -2.7897674e-06  9.9270445e-01 -7.4111795e-06\n   1.2057294e-01  3.9996497e-02\
+    \  4.0003240e-02  1.7772376e-03\n  -4.3838620e-04 -1.0833144e-06  1.7778069e-03\
+    \  4.3805392e-04\n   1.3545156e-06  1.7421940e-01  3.0856987e-02  7.7499688e-01\n\
+    \   2.5472063e-01  1.5576276e-01  7.7499902e-01  2.6139387e-01\n  -1.1337246e-01\
+    \  7.7499926e-01  2.5000000e-01  0.0000000e+00\n   7.5199986e-01  2.5000000e-01\
+    \  0.0000000e+00  7.5199986e-01]]"
+_last_episode_starts:
+  desc: null
+  value: '[ True]'
+_last_original_obs:
+  desc: null
+  value: None
+_episode_num:
+  desc: null
+  value: 0
+use_sde:
+  desc: null
+  value: 'False'
+sde_sample_freq:
+  desc: null
+  value: -1
+_current_progress_remaining:
+  desc: null
+  value: 1.0
+_stats_window_size:
+  desc: null
+  value: 100
+ep_info_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+ep_success_buffer:
+  desc: null
+  value: deque([], maxlen=100)
+_n_updates:
+  desc: null
+  value: 0
+_custom_logger:
+  desc: null
+  value: 'False'
+env:
+  desc: null
+  value: <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7d8cc61214e0>
+_vec_normalize_env:
+  desc: null
+  value: None
+observation_space:
+  desc: null
+  value: Box(-inf, inf, (52,), float32)
+action_space:
+  desc: null
+  value: Box(-1.0, 1.0, (8,), float32)
+n_envs:
+  desc: null
+  value: 1
+buffer_size:
+  desc: null
+  value: 1000000
+batch_size:
+  desc: null
+  value: 100
+learning_starts:
+  desc: null
+  value: 100
+tau:
+  desc: null
+  value: 0.005
+gamma:
+  desc: null
+  value: 0.99
+gradient_steps:
+  desc: null
+  value: -1
+optimize_memory_usage:
+  desc: null
+  value: 'False'
+replay_buffer:
+  desc: null
+  value: <stable_baselines3.common.buffers.ReplayBuffer object at 0x7d8cc6121690>
+replay_buffer_class:
+  desc: null
+  value: <class 'stable_baselines3.common.buffers.ReplayBuffer'>
+replay_buffer_kwargs:
+  desc: null
+  value: '{}'
+_episode_storage:
+  desc: null
+  value: None
+train_freq:
+  desc: null
+  value: 'TrainFreq(frequency=1, unit=<TrainFrequencyUnit.EPISODE: ''episode''>)'
+use_sde_at_warmup:
+  desc: null
+  value: 'False'
+policy_delay:
+  desc: null
+  value: 1
+target_noise_clip:
+  desc: null
+  value: 0.0
+target_policy_noise:
+  desc: null
+  value: 0.1
+lr_schedule:
+  desc: null
+  value: <function constant_fn.<locals>.func at 0x7d8cc65f2b90>
+policy:
+  desc: null
+  value: "TD3Policy(\n  (actor): Actor(\n    (features_extractor): FlattenExtractor(\n\
+    \      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (mu): Sequential(\n\
+    \      (0): Linear(in_features=52, out_features=400, bias=True)\n      (1): ReLU()\n\
+    \      (2): Linear(in_features=400, out_features=300, bias=True)\n      (3): ReLU()\n\
+    \      (4): Linear(in_features=300, out_features=8, bias=True)\n      (5): Tanh()\n\
+    \    )\n  )\n  (actor_target): Actor(\n    (features_extractor): FlattenExtractor(\n\
+    \      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (mu): Sequential(\n\
+    \      (0): Linear(in_features=52, out_features=400, bias=True)\n      (1): ReLU()\n\
+    \      (2): Linear(in_features=400, out_features=300, bias=True)\n      (3): ReLU()\n\
+    \      (4): Linear(in_features=300, out_features=8, bias=True)\n      (5): Tanh()\n\
+    \    )\n  )\n  (critic): ContinuousCritic(\n    (features_extractor): FlattenExtractor(\n\
+    \      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (qf0): Sequential(\n\
+    \      (0): Linear(in_features=60, out_features=400, bias=True)\n      (1): ReLU()\n\
+    \      (2): Linear(in_features=400, out_features=300, bias=True)\n      (3): ReLU()\n\
+    \      (4): Linear(in_features=300, out_features=1, bias=True)\n    )\n  )\n \
+    \ (critic_target): ContinuousCritic(\n    (features_extractor): FlattenExtractor(\n\
+    \      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (qf0): Sequential(\n\
+    \      (0): Linear(in_features=60, out_features=400, bias=True)\n      (1): ReLU()\n\
+    \      (2): Linear(in_features=400, out_features=300, bias=True)\n      (3): ReLU()\n\
+    \      (4): Linear(in_features=300, out_features=1, bias=True)\n    )\n  )\n)"
+actor:
+  desc: null
+  value: "Actor(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1,\
+    \ end_dim=-1)\n  )\n  (mu): Sequential(\n    (0): Linear(in_features=52, out_features=400,\
+    \ bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=400, out_features=300,\
+    \ bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=300, out_features=8,\
+    \ bias=True)\n    (5): Tanh()\n  )\n)"
+actor_target:
+  desc: null
+  value: "Actor(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1,\
+    \ end_dim=-1)\n  )\n  (mu): Sequential(\n    (0): Linear(in_features=52, out_features=400,\
+    \ bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=400, out_features=300,\
+    \ bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=300, out_features=8,\
+    \ bias=True)\n    (5): Tanh()\n  )\n)"
+critic:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=60,\
+    \ out_features=400, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=400,\
+    \ out_features=300, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=300,\
+    \ out_features=1, bias=True)\n  )\n)"
+critic_target:
+  desc: null
+  value: "ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten):\
+    \ Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=60,\
+    \ out_features=400, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=400,\
+    \ out_features=300, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=300,\
+    \ out_features=1, bias=True)\n  )\n)"
+actor_batch_norm_stats:
+  desc: null
+  value: '[]'
+critic_batch_norm_stats:
+  desc: null
+  value: '[]'
+actor_batch_norm_stats_target:
+  desc: null
+  value: '[]'
+critic_batch_norm_stats_target:
+  desc: null
+  value: '[]'
+_logger:
+  desc: null
+  value: <stable_baselines3.common.logger.Logger object at 0x7d8cf0899c90>
