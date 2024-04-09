@@ -70,3 +70,13 @@ register(
         },
         max_episode_steps=40
     )
+
+register(
+        id='teodor_zone_pick_and_place-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_zone_pick_and_place'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=40
+    )
