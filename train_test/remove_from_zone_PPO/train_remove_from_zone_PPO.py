@@ -63,7 +63,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"remove_from_zone_PPO{current_datetime}_PLANNING"
+filename = f"remove_from_zone_PPO{current_datetime}"
 model.save(filename)
 
 run.finish()

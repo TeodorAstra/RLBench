@@ -77,10 +77,10 @@ class TeodorZonePickAndPlace(Task):
         
         grasped_in_zone_reward = self.grasped_in_zone_reward()
         #rewards movement of cube 
-        v_r_1 = self.movement_reward(self.cube1)
+        #v_r_1 = self.movement_reward(self.cube1)
         #v_r_2 = self.movement_reward(self.cube2)
 
-        velocity_reward = v_r_1#+v_r_2
+        #velocity_reward = v_r_1#+v_r_2
 
         #rewards for cube exiting zone
         e_r_1 = self.exit_reward(self.cube1)
@@ -93,8 +93,8 @@ class TeodorZonePickAndPlace(Task):
         #reward for completed task
         total_reward = (gripper_to_zone + 
                         gripper_movement_in_zone +
-                        velocity_reward + #Causing issues when cubes spawn
-                        exit_reward +
+                        #velocity_reward + #Causing issues when cubes spawn
+                        #exit_reward +
                         grasped_in_zone_reward +
                         task_complete_reward)
 
@@ -149,7 +149,7 @@ class TeodorZonePickAndPlace(Task):
     def task_complete_reward(self)->float:
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and not 
             GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
-            return 1000
+            return 100
         else:
             return 0
         
