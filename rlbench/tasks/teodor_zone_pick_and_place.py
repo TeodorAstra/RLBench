@@ -2,7 +2,6 @@ from typing import List, Tuple
 from rlbench.backend.task import Task
 from pyrep.objects.shape import Shape
 from pyrep.objects.proximity_sensor import ProximitySensor
-from rlbench.backend.spawn_boundary import SpawnBoundary
 from rlbench.backend.conditions import DetectedCondition, GraspedCondition
 
 import numpy as np
@@ -13,17 +12,17 @@ class TeodorZonePickAndPlace(Task):
     def init_task(self) -> None:
         # TODO: This is called once when a task is initialised.
         self.cube1 = Shape('cube1')
-        self.cube2 = Shape('cube2')
+   
     
 
-        self.register_graspable_objects([self.cube1, self.cube2])
+        self.register_graspable_objects([self.cube1])
       
         self.zone = Shape('zone')
 
-        self.spawn_boundary = Shape('spawn_boundary')
+        
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
 
-        zone_is_empty_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True)])
+        zone_is_empty_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True), GraspedCondition(self.robot.gripper, self.cube1)])
         self.register_success_conditions(zone_is_empty_condition)
 
 
@@ -31,7 +30,7 @@ class TeodorZonePickAndPlace(Task):
 
         self.outside_zone = {
             'cube1': False,
-            'cube2': False,
+
         }
         
         print("Start new ep")
@@ -50,7 +49,7 @@ class TeodorZonePickAndPlace(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
-            self.cube1.get_position(), self.cube2.get_position(), self.zone.get_position(), self.in_zone_sensor.get_position()])
+            self.cube1.get_position(), self.in_zone_sensor.get_position()])
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
         return [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
@@ -70,12 +69,16 @@ class TeodorZonePickAndPlace(Task):
         #self.close_tip_reward()
 
         #negative reward for grippers disntance to zone
-        gripper_to_zone = self.zone_distance_reward()
+        #gripper_to_zone = self.zone_distance_reward()
+
+        gripper_to_cube = self.cube_distance_reward()
         
         #reward for end effector movement in zone. This to encourage interaction with the cubes
-        gripper_movement_in_zone = self.gripper_movement_in_zone()
+        #gripper_movement_in_zone = self.gripper_movement_in_zone()
         
         grasped_in_zone_reward = self.grasped_in_zone_reward()
+
+        grasped_reward = self.grasped_reward()
         #rewards movement of cube 
         #v_r_1 = self.movement_reward(self.cube1)
         #v_r_2 = self.movement_reward(self.cube2)
@@ -91,12 +94,8 @@ class TeodorZonePickAndPlace(Task):
         task_complete_reward = self.task_complete_reward()
 
         #reward for completed task
-        total_reward = (gripper_to_zone + 
-                        gripper_movement_in_zone +
-                        #velocity_reward + #Causing issues when cubes spawn
-                        #exit_reward +
-                        grasped_in_zone_reward +
-                        task_complete_reward)
+        total_reward = (gripper_to_cube + grasped_reward + task_complete_reward)
+             
 
         #print(total_reward)
         #print(self.outside_zone)
@@ -111,6 +110,10 @@ class TeodorZonePickAndPlace(Task):
         else:
             return -np.linalg.norm(
                 self.zone.get_position() - self.robot.arm.get_tip().get_position())
+        
+    def cube_distance_reward(self)->float:
+       return -np.linalg.norm(
+                self.cube1.get_position() - self.robot.arm.get_tip().get_position())
         
     def gripper_movement_in_zone(self)->float:
         if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0]:
@@ -147,16 +150,23 @@ class TeodorZonePickAndPlace(Task):
             return 0
     
     def task_complete_reward(self)->float:
-        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and not 
-            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
-            return 100
+        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and 
+            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]): #and not 
+           # GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
+            return 500
         else:
             return 0
         
     def close_tip_reward(self):
         print(self.robot.gripper.get_open_amount())
 
-    
+    def grasped_reward(self)->float:
+        if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
+            print("CUBE GRASPED")
+            return 100
+        else:
+            return 0
+
     def grasped_in_zone_reward(self)->float:
         if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0] and GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
             return 500
