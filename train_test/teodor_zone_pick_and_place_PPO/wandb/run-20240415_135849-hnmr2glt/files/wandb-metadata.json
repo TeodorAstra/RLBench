@@ -1,0 +1,80 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-04-15T11:58:50.351271",
+    "startedAt": "2024-04-15T11:58:49.596774",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/teodor_zone_pick_and_place_PPO/train_zone_pick_and_place_PPO.py",
+    "codePathLocal": "train_zone_pick_and_place_PPO.py",
+    "codePath": "train_test/teodor_zone_pick_and_place_PPO/train_zone_pick_and_place_PPO.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "bfe01f6518762ebe0b6e32f0115a57bdb10adc78"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "LAPTOP-CD2EC9DM",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1991.999,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 14.85036849975586
+        }
+    },
+    "memory": {
+        "total": 3.779277801513672
+    }
+}
