@@ -8,7 +8,7 @@ from pyrep.objects.dummy import Dummy
 from pyrep.objects.vision_sensor import VisionSensor
 
 from rlbench.action_modes.action_mode import MoveArmThenGripper
-from rlbench.action_modes.arm_action_modes import JointVelocity, EndEffectorPoseViaPlanning, JointPosition
+from rlbench.action_modes.arm_action_modes import JointVelocity, EndEffectorPoseViaPlanning, JointPosition, EndEffectorPoseViaIK
 from rlbench.action_modes.gripper_action_modes import Discrete
 from rlbench.environment import Environment
 from rlbench.observation_config import ObservationConfig
@@ -33,9 +33,10 @@ class RLBenchEnv(gym.Env):
             raise ValueError(
                 'Unrecognised observation_mode: %s.' % observation_mode)
 
-        action_mode = MoveArmThenGripper(JointVelocity(), Discrete()) #Original
-        #action_mode = MoveArmThenGripper(JointPosition(), Discrete())
-        action_mode = MoveArmThenGripper(EndEffectorPoseViaPlanning(), Discrete())
+        #action_mode = MoveArmThenGripper(JointVelocity(), Discrete()) #Original
+        action_mode = MoveArmThenGripper(JointPosition(), Discrete())
+        #action_mode = MoveArmThenGripper(EndEffectorPoseViaPlanning(), Discrete())
+        #action_mode = MoveArmThenGripper(EndEffectorPoseViaIK(), Discrete())
         self.env = Environment(
             action_mode, obs_config=obs_config, headless=True, shaped_rewards=True)
         self.env.launch()

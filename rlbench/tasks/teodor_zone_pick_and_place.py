@@ -71,7 +71,9 @@ class TeodorZonePickAndPlace(Task):
         #negative reward for grippers disntance to zone
         #gripper_to_zone = self.zone_distance_reward()
 
-        gripper_to_cube = self.cube_distance_reward()
+        #gripper_to_cube = self.cube_distance_reward()
+
+        gripper_to_cube_positive = self.cube_distance_reward_postive()
 
         cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
         
@@ -96,7 +98,7 @@ class TeodorZonePickAndPlace(Task):
         task_complete_reward = self.task_complete_reward()
 
         #reward for completed task
-        total_reward = (gripper_to_cube + 
+        total_reward = (gripper_to_cube_positive + 
                         grasped_reward + 
                         cube_distance_from_center_grasped +
                         task_complete_reward)
@@ -119,6 +121,14 @@ class TeodorZonePickAndPlace(Task):
     def cube_distance_reward(self)->float:
        return -np.linalg.norm(
                 self.cube1.get_position() - self.robot.arm.get_tip().get_position())
+    
+    def cube_distance_reward_postive(self)->float:
+       distance = np.linalg.norm(
+                self.cube1.get_position() - self.robot.arm.get_tip().get_position())
+       reward = 10/(100*distance + 1)
+
+       return reward
+    
     
     def cube_distance_from_center_while_grasped_reward(self)->float:
         if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:

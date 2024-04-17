@@ -31,10 +31,10 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 1000000,
+    "total_timesteps": 500000,
     "env_id": env,
     "n_steps": 200,
-    "ent_coef": 0.01
+    "ent_coef": 0.05
 }
 
 
@@ -63,7 +63,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"remove_zone_pick_and_place_{current_datetime}_PLANNING"
+filename = f"remove_zone_pick_and_place_{current_datetime}_JOINPOSITION"
 model.save(filename)
 
 run.finish()
