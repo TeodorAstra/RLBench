@@ -99,7 +99,7 @@ class TeodorZonePickAndPlace(Task):
 
         #reward for completed task
         total_reward = (gripper_to_cube_positive + 
-                        grasped_reward + 
+                        #grasped_reward + 
                         cube_distance_from_center_grasped +
                         task_complete_reward)
              
@@ -176,7 +176,7 @@ class TeodorZonePickAndPlace(Task):
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and 
             GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]): #and not 
            # GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
-            return 500
+            return 1000
         else:
             return 0
         
