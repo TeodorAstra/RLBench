@@ -1,0 +1,70 @@
+{
+    "os": "Linux-6.5.0-27-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-04-17T18:35:11.384303",
+    "startedAt": "2024-04-17T18:35:10.212533",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/teodor_zone_pick_and_place_PPO_v2/train_zone_pick_and_place_PPO_v2.py",
+    "codePathLocal": "train_zone_pick_and_place_PPO_v2.py",
+    "codePath": "train_test/teodor_zone_pick_and_place_PPO_v2/train_zone_pick_and_place_PPO_v2.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "867a5670f685acbce4a2e8d1b83f94733b4f4aa9"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "Ubuntu",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 6,
+    "cpu_count_logical": 6,
+    "cpu_freq": {
+        "current": 3392.146,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3392.146,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 250.16387557983398,
+            "used": 29.20142364501953
+        }
+    },
+    "memory": {
+        "total": 4.849819183349609
+    }
+}

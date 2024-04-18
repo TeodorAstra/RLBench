@@ -143,7 +143,13 @@ class TeodorZonePickAndPlaceV2(Task):
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and 
             DetectedCondition(self.cube2, self.in_zone_sensor, negated=True).condition_met()[0]): #and not 
            # GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
-            return 1000
+            reward = 500
+            if(self.has_been_grasped['cube1']):
+                reward = reward + 500
+            if(self.has_been_grasped['cube2']):
+                reward = reward + 500
+            return reward
+            
         else:
             return 0
         

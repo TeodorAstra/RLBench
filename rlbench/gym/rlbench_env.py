@@ -9,7 +9,7 @@ from pyrep.objects.vision_sensor import VisionSensor
 
 from rlbench.action_modes.action_mode import MoveArmThenGripper
 from rlbench.action_modes.arm_action_modes import JointVelocity, EndEffectorPoseViaPlanning, JointPosition, EndEffectorPoseViaIK
-from rlbench.action_modes.gripper_action_modes import Discrete
+from rlbench.action_modes.gripper_action_modes import Discrete, GripperJointPosition
 from rlbench.environment import Environment
 from rlbench.observation_config import ObservationConfig
 
@@ -34,6 +34,7 @@ class RLBenchEnv(gym.Env):
                 'Unrecognised observation_mode: %s.' % observation_mode)
 
         action_mode = MoveArmThenGripper(JointVelocity(), Discrete()) #Original
+        #action_mode = MoveArmThenGripper(JointVelocity(), GripperJointPosition())
         #action_mode = MoveArmThenGripper(JointPosition(), Discrete())
         #action_mode = MoveArmThenGripper(EndEffectorPoseViaPlanning(), Discrete())
         #action_mode = MoveArmThenGripper(EndEffectorPoseViaIK(), Discrete())
