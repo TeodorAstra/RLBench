@@ -90,3 +90,13 @@ register(
         },
         max_episode_steps=80
     )
+
+register(
+        id='teodor_pick_and_lift-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_pick_and_lift'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=80
+    )

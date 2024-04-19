@@ -1,0 +1,80 @@
+{
+    "os": "Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-04-18T14:43:34.579492",
+    "startedAt": "2024-04-18T14:43:33.968781",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodor/Exjobb/Sim/RLBench/train_test/pick_and_lift/train_pick_and_lift.py",
+    "codePathLocal": "train_pick_and_lift.py",
+    "codePath": "train_test/pick_and_lift/train_pick_and_lift.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "18328a832a3e75ce978b6312d3cad6a0cde91b1d"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodor/Exjobb/Sim/RLBench",
+    "host": "LAPTOP-CD2EC9DM",
+    "username": "teodor",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1991.999,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 1991.999,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1006.853931427002,
+            "used": 15.118789672851562
+        }
+    },
+    "memory": {
+        "total": 3.779277801513672
+    }
+}
