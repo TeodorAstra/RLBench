@@ -1,6 +1,7 @@
 from typing import List, Tuple
 from rlbench.backend.task import Task
 from pyrep.objects.shape import Shape
+from pyrep.objects.dummy import Dummy
 from pyrep.objects.proximity_sensor import ProximitySensor
 from rlbench.backend.conditions import DetectedCondition, GraspedCondition
 
@@ -12,6 +13,14 @@ class TeodorExtractWithDistractors(Task):
     def init_task(self) -> None:
         # TODO: This is called once when a task is initialised.
         self.cube1 = Shape('cube1')
+        self.distractor1 = Shape('cube2')
+        self.distractor2 = Shape('cube3')
+        self.distractor3 = Shape('cube4')
+        self.distractor4 = Shape('cube5')
+        self.distractor5 = Shape('cube6')
+
+        self.target = Dummy('Target_pos')
+
    
     
 
@@ -22,15 +31,25 @@ class TeodorExtractWithDistractors(Task):
         
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
 
-        zone_is_empty_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True), GraspedCondition(self.robot.gripper, self.cube1)])
-        self.register_success_conditions(zone_is_empty_condition)
+        complete_task_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True), 
+                                    GraspedCondition(self.robot.gripper, self.cube1),
+                                    DetectedCondition(self.distractor1, self.in_zone_sensor),
+                                    DetectedCondition(self.distractor2, self.in_zone_sensor), 
+                                    DetectedCondition(self.distractor3, self.in_zone_sensor), 
+                                    DetectedCondition(self.distractor4, self.in_zone_sensor),
+                                    DetectedCondition(self.distractor5, self.in_zone_sensor)])
+        self.register_success_conditions(complete_task_condition)
 
 
     def init_episode(self, index: int) -> List[str]:
 
         self.outside_zone = {
             'cube1': False,
-
+            'distractor1' : False,
+            'distractor2' : False,
+            'distractor3' : False,
+            'distractor4' : False,
+            'distractor5' : False
         }
         
         print("Start new ep")
@@ -49,7 +68,14 @@ class TeodorExtractWithDistractors(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
-            self.cube1.get_position(), self.in_zone_sensor.get_position()])
+            self.cube1.get_position(), self.in_zone_sensor.get_position(),
+            self.distractor1.get_position(),
+            self.distractor2.get_position(),
+            self.distractor3.get_position(),
+            self.distractor4.get_position(),
+            self.distractor5.get_position(),
+            self.target.get_position()
+            ])
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
         return [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
@@ -66,47 +92,31 @@ class TeodorExtractWithDistractors(Task):
     """        
     def reward(self) -> float:
 
-        #self.close_tip_reward()
-
-        #negative reward for grippers disntance to zone
-        #gripper_to_zone = self.zone_distance_reward()
-
-        #gripper_to_cube = self.cube_distance_reward()
-
         gripper_to_cube_positive = self.cube_distance_reward_postive()
 
         cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
-        
-        #reward for end effector movement in zone. This to encourage interaction with the cubes
-        #gripper_movement_in_zone = self.gripper_movement_in_zone()
-        
-        grasped_in_zone_reward = self.grasped_in_zone_reward()
-
-        grasped_reward = self.grasped_reward()
-        #rewards movement of cube 
-        #v_r_1 = self.movement_reward(self.cube1)
-        #v_r_2 = self.movement_reward(self.cube2)
-
-        #velocity_reward = v_r_1#+v_r_2
-
-        #rewards for cube exiting zone
-        e_r_1 = self.exit_reward(self.cube1)
-        #e_r_2 = self.exit_reward(self.cube2)
-
-        exit_reward = e_r_1#+e_r_2
 
         task_complete_reward = self.task_complete_reward()
 
-        #reward for completed task
+        distracor1 = self.exit_punishment(self.distractor1)
+        distracor2 = self.exit_punishment(self.distractor2)
+        distracor3 = self.exit_punishment(self.distractor3)
+        distracor4 = self.exit_punishment(self.distractor4)
+        distracor4 = self.exit_punishment(self.distractor5)
+
+        cube_distance_to_target_grasped = self.cube_distance_to_target_while_grasped_reward()
+
+        distractor_punishment = (distracor1 +
+                                 distracor2 +
+                                 distracor3 +
+                                 distracor4)
+
         total_reward = (gripper_to_cube_positive + 
-                        #grasped_reward + 
-                        cube_distance_from_center_grasped +
+                        #cube_distance_from_center_grasped +
+                        cube_distance_to_target_grasped +
+                        distractor_punishment +
                         task_complete_reward)
-             
-
-        #print(total_reward)
-        #print(self.outside_zone)
-
+            
         return total_reward
     
 
@@ -137,7 +147,16 @@ class TeodorExtractWithDistractors(Task):
         else:
             return 0
     
-        
+    def cube_distance_to_target_while_grasped_reward(self)->float:
+        if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
+            distance = np.linalg.norm(
+            self.cube1.get_position() - self.target.get_position())
+            reward = 100/(100*distance + 1)
+            return reward
+        else:
+            return 0
+
+
     def gripper_movement_in_zone(self)->float:
         if DetectedCondition(self.robot.arm.get_tip(), self.in_zone_sensor).condition_met()[0]:
             gripper_velocity = np.linalg.norm(self.robot.arm.get_tip().get_velocity()[0])
@@ -171,11 +190,26 @@ class TeodorExtractWithDistractors(Task):
                 return 0
         else:
             return 0
-    
+        
+    def exit_punishment(self, cube_id)->float:
+            cube_name = cube_id.get_name()
+            if not self.outside_zone[cube_name]:
+                if(DetectedCondition(cube_id,self.in_zone_sensor, negated=True).condition_met()[0]): #Negated meaning its no longer in the sensor
+                    self.outside_zone[cube_name] = True
+                    return -100
+                else:
+                    return 0
+            else:
+                return 0
+            
     def task_complete_reward(self)->float:
-        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and 
-            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]): #and not 
-           # GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
+        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and
+            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and 
+            DetectedCondition(self.distractor1, self.in_zone_sensor).condition_met()[0] and
+            DetectedCondition(self.distractor2, self.in_zone_sensor).condition_met()[0] and
+            DetectedCondition(self.distractor3, self.in_zone_sensor).condition_met()[0] and
+            DetectedCondition(self.distractor4, self.in_zone_sensor).condition_met()[0] and
+            DetectedCondition(self.distractor5, self.in_zone_sensor).condition_met()[0] ):
             return 1000
         else:
             return 0

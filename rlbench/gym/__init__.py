@@ -100,3 +100,13 @@ register(
         },
         max_episode_steps=80
     )
+
+register(
+        id='teodor_extract_with_distractors-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_extract_with_distractors'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=80
+    )
