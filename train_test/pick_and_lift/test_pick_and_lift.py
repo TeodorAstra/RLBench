@@ -9,7 +9,7 @@ from stable_baselines3 import PPO
 env = gym.make('teodor_pick_and_lift-state-v0', render_mode="human")
 
 # Load the trained agent
-model = PPO.load("pick_and_lift_20240419_0453", print_system_info=True)
+model = PPO.load("pick_and_lift_20240420_0043", print_system_info=True)
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)

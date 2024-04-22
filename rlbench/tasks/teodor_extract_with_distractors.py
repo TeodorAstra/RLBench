@@ -13,11 +13,11 @@ class TeodorExtractWithDistractors(Task):
     def init_task(self) -> None:
         # TODO: This is called once when a task is initialised.
         self.cube1 = Shape('cube1')
-        self.distractor1 = Shape('cube2')
-        self.distractor2 = Shape('cube3')
-        self.distractor3 = Shape('cube4')
-        self.distractor4 = Shape('cube5')
-        self.distractor5 = Shape('cube6')
+        self.distractor1 = Shape('distractor1')
+        self.distractor2 = Shape('distractor2')
+        self.distractor3 = Shape('distractor3')
+        self.distractor4 = Shape('distractor4')
+        self.distractor5 = Shape('distractor5')
 
         self.target = Dummy('Target_pos')
 
@@ -94,7 +94,7 @@ class TeodorExtractWithDistractors(Task):
 
         gripper_to_cube_positive = self.cube_distance_reward_postive()
 
-        cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
+        #cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
 
         task_complete_reward = self.task_complete_reward()
 
