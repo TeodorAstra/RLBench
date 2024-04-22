@@ -31,7 +31,7 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 1000000,
+    "total_timesteps": 1500000,
     "env_id": env,
     "n_steps": 400,
     "ent_coef": 0.01
@@ -63,7 +63,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"extract_with_distractors_{current_datetime}"
+filename = f"extract_with_distractors_{current_datetime}_DYNAMIC"
 model.save(filename)
 
 run.finish()
