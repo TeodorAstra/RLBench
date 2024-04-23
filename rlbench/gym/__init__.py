@@ -88,7 +88,7 @@ register(
             'task_class': name_to_task_class('teodor_zone_pick_and_place_v2'),
             'observation_mode': 'state'
         },
-        max_episode_steps=80
+        max_episode_steps=150
     )
 
 register(
