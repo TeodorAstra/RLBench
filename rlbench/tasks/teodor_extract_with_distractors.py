@@ -32,7 +32,7 @@ class TeodorExtractWithDistractors(Task):
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
 
         complete_task_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True), 
-                                    GraspedCondition(self.robot.gripper, self.cube1),
+                                    #GraspedCondition(self.robot.gripper, self.cube1),
                                     DetectedCondition(self.distractor1, self.in_zone_sensor),
                                     DetectedCondition(self.distractor2, self.in_zone_sensor), 
                                     DetectedCondition(self.distractor3, self.in_zone_sensor), 
@@ -94,7 +94,7 @@ class TeodorExtractWithDistractors(Task):
 
         gripper_to_cube_positive = self.cube_distance_reward_postive()
 
-        #cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
+        cube_distance_from_center_grasped = self.cube_distance_from_center_while_grasped_reward()
 
         task_complete_reward = self.task_complete_reward()
 
@@ -104,7 +104,7 @@ class TeodorExtractWithDistractors(Task):
         distracor4 = self.exit_punishment(self.distractor4)
         distracor4 = self.exit_punishment(self.distractor5)
 
-        cube_distance_to_target_grasped = self.cube_distance_to_target_while_grasped_reward()
+        #cube_distance_to_target_grasped = self.cube_distance_to_target_while_grasped_reward()
 
         distractor_punishment = (distracor1 +
                                  distracor2 +
@@ -112,8 +112,8 @@ class TeodorExtractWithDistractors(Task):
                                  distracor4)
 
         total_reward = (gripper_to_cube_positive + 
-                        #cube_distance_from_center_grasped +
-                        cube_distance_to_target_grasped +
+                        cube_distance_from_center_grasped +
+                        #cube_distance_to_target_grasped +
                         distractor_punishment +
                         task_complete_reward)
             
@@ -142,6 +142,7 @@ class TeodorExtractWithDistractors(Task):
     
     def cube_distance_from_center_while_grasped_reward(self)->float:
         if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
+            print("CUBE GRASPED")
             return 100*np.linalg.norm(
                     self.cube1.get_position() - self.zone.get_position())
         else:
@@ -204,7 +205,7 @@ class TeodorExtractWithDistractors(Task):
             
     def task_complete_reward(self)->float:
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and
-            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and 
+            #GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and 
             DetectedCondition(self.distractor1, self.in_zone_sensor).condition_met()[0] and
             DetectedCondition(self.distractor2, self.in_zone_sensor).condition_met()[0] and
             DetectedCondition(self.distractor3, self.in_zone_sensor).condition_met()[0] and

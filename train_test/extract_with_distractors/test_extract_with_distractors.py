@@ -9,7 +9,7 @@ from stable_baselines3 import PPO
 env = gym.make('teodor_extract_with_distractors-state-v0', render_mode='human')
 
 # Load the trained agent
-model = PPO.load("extract_with_distractors_20240422_1024", print_system_info=True)
+model = PPO.load("extract_with_distractors_20240423_0822_DYNAMIC", print_system_info=True)
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
