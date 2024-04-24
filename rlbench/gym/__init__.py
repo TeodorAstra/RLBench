@@ -110,3 +110,13 @@ register(
         },
         max_episode_steps=80
     )
+
+register(
+        id='teodor_object_iso-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_object_iso'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=200
+    )
