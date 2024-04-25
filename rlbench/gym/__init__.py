@@ -120,3 +120,13 @@ register(
         },
         max_episode_steps=200
     )
+
+register(
+        id='teodor_extract_with_distractors_scrambled-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_extract_with_distractors_scrambled'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=100
+    )
