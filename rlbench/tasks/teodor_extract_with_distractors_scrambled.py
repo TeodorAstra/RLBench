@@ -85,7 +85,7 @@ class TeodorExtractWithDistractorsScrambled(Task):
             self.distractor3.get_position(),
             self.distractor4.get_position(),
             self.distractor5.get_position(),
-            self.target.get_position()
+            #self.target.get_position()
             ])
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
