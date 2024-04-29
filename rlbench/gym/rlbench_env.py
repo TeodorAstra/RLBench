@@ -33,8 +33,8 @@ class RLBenchEnv(gym.Env):
             raise ValueError(
                 'Unrecognised observation_mode: %s.' % observation_mode)
 
-        action_mode = MoveArmThenGripper(JointVelocity(), Discrete()) #Original
-        #action_mode = MoveArmThenGripper(JointVelocity(), GripperJointPosition())
+        #action_mode = MoveArmThenGripper(JointVelocity(), Discrete()) #Original
+        action_mode = MoveArmThenGripper(JointVelocity(), GripperJointPosition(attach_grasped_objects=False))
         #action_mode = MoveArmThenGripper(JointPosition(), Discrete())
         #action_mode = MoveArmThenGripper(EndEffectorPoseViaPlanning(), Discrete())
         #action_mode = MoveArmThenGripper(EndEffectorPoseViaIK(), Discrete())
