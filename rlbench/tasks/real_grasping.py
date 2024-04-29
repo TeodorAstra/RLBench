@@ -4,6 +4,7 @@ from pyrep.objects.shape import Shape
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.dummy import Dummy
 from rlbench.backend.conditions import DetectedCondition, GraspedCondition
+from pyrep.objects.force_sensor import ForceSensor
 
 import numpy as np
 
@@ -26,9 +27,9 @@ class RealGrasping(Task):
         self.target_2 = ProximitySensor('target_2')
         self.final_pos = ProximitySensor('final_pos')
 
-        self.tip_1 = Dummy('tip_1')
-        self.tip_2 = Dummy('tip_2')
-
+        self.tip_1 = ForceSensor('Panda_gripper_touchSensor0')
+        self.tip_2 = ForceSensor('Panda_gripper_touchSensor1')
+        
 
         zone_is_empty_condition = ([DetectedCondition(self.cube1, self.final_pos)])
         self.register_success_conditions(zone_is_empty_condition)
@@ -100,8 +101,8 @@ class RealGrasping(Task):
         return total_reward
     
     def grip_zone_distance_reward(self)->float:
-            target_1_dist = -np.linalg.norm(self.target_1.get_position() - self.tip_1.get_position)
-            target_2_dist = -np.linalg.norm(self.target_2.get_position() - self.tip_2.get_position)
+            target_1_dist = -np.linalg.norm(self.target_1.get_position() - self.tip_1.get_position())
+            target_2_dist = -np.linalg.norm(self.target_2.get_position() - self.tip_2.get_position())
 
             total = target_1_dist + target_2_dist
 
@@ -109,16 +110,16 @@ class RealGrasping(Task):
         
     def tips_in_zone_reward(self)->float:
         reward = 0
-        if DetectedCondition(self.tip_1, self.target_1):
+        if DetectedCondition(self.tip_1, self.target_1).condition_met()[0]:
             reward = reward + 10
             print("Tip 1 in zone")
-        if DetectedCondition(self.tip_2, self.target_2):
+        if DetectedCondition(self.tip_2, self.target_2).condition_met()[0]:
             reward = reward + 10
             print("Tip 2 in zone")
         return reward
     
     def block_final_pos(self)->float:
-            dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position)
+            dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
             total = 100*dist
 
             return total
