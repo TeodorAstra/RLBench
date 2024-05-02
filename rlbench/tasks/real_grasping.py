@@ -54,8 +54,10 @@ class RealGrasping(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
-            self.cube1.get_position(), self.target_1.get_position(), self.target_2.get_position(),
-            self.tip_1.get_position(), self.tip_2.get_position(), self.final_pos.get_position()])
+            self.cube1.get_position(), self.final_pos.get_position()])
+            #self.target_1.get_position(), self.target_2.get_position(),
+            #self.tip_1.get_position(), self.tip_2.get_position(), 
+            
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
         return [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]
@@ -73,9 +75,9 @@ class RealGrasping(Task):
     def reward(self) -> float:
 
   
-        #gripper_to_cube = self.cube_distance_reward()
+        gripper_to_cube = self.cube_distance_reward()
 
-        tips_to_zones = self.grip_zone_distance_reward() 
+        #tips_to_zones = self.grip_zone_distance_reward() 
 
         tips_in_zone = self.tips_in_zone_reward()
        
@@ -88,7 +90,8 @@ class RealGrasping(Task):
 
 
         #reward for completed task
-        total_reward = (tips_to_zones +
+        total_reward = (#tips_to_zones +
+                        gripper_to_cube +
                         tips_in_zone +
                         cube_distance_final_pos +
                         grasped_reward +
@@ -120,7 +123,7 @@ class RealGrasping(Task):
     
     def block_final_pos(self)->float:
             dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
-            total = 100*dist
+            total = 10*dist
 
             return total
 
