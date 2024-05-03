@@ -15,7 +15,7 @@ class RealGrasping(Task):
         # TODO: This is called once when a task is initialised.
         self.cube1 = Shape('cube1')
    
-    
+        self.center_tip = Dummy('Panda_tip')
 
         self.register_graspable_objects([self.cube1])
       
@@ -27,8 +27,14 @@ class RealGrasping(Task):
         self.target_2 = ProximitySensor('target_2')
         self.final_pos = ProximitySensor('final_pos')
 
-        self.tip_1 = ForceSensor('Panda_gripper_touchSensor0')
-        self.tip_2 = ForceSensor('Panda_gripper_touchSensor1')
+        #self.tip_1 = ForceSensor('Panda_gripper_touchSensor0')
+        #self.tip_2 = ForceSensor('Panda_gripper_touchSensor1')
+
+        #self.tip_1 = Shape('tip_placement_1')
+        #self.tip_2 = Shape('tip_placement_2')
+
+        self.tip_1 = Shape('Panda_rightfinger_force_contact')
+        self.tip_2 = Shape('Panda_leftfinger_force_contact')
         
 
         zone_is_empty_condition = ([DetectedCondition(self.cube1, self.final_pos)])
@@ -54,9 +60,10 @@ class RealGrasping(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
-            self.cube1.get_position(), self.final_pos.get_position()])
-            #self.target_1.get_position(), self.target_2.get_position(),
-            #self.tip_1.get_position(), self.tip_2.get_position(), 
+            self.cube1.get_position(), self.final_pos.get_position(), 
+            self.target_1.get_position(), self.target_2.get_position()])
+            #self.tip_1.get_position(), self.tip_2.get_position()])
+            
             
 
     def base_rotation_bounds(self) -> Tuple[List[float], List[float]]:
@@ -123,7 +130,7 @@ class RealGrasping(Task):
     
     def block_final_pos(self)->float:
             dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
-            total = 10*dist
+            total = 100*dist
 
             return total
 
