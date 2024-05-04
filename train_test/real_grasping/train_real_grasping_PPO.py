@@ -33,7 +33,7 @@ config = {
     "policy_type": "MlpPolicy",
     "total_timesteps": 2000000,
     "env_id": env,
-    "n_steps": 250,
+    "n_steps": 500,
     "ent_coef": 0.01
 }
 
