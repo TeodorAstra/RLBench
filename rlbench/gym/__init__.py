@@ -138,5 +138,5 @@ register(
             'task_class': name_to_task_class('real_grasping'),
             'observation_mode': 'state'
         },
-        max_episode_steps=80
+        max_episode_steps=60
     )

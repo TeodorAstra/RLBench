@@ -88,9 +88,11 @@ class RealGrasping(Task):
 
         tips_in_zone = self.tips_in_zone_reward()
        
-        cube_distance_final_pos = self.block_final_pos()
+        #cube_distance_final_pos = self.block_final_pos()
 
-        grasped_reward = self.grasped_reward()
+        distance_grasped = self.cube_distance_from_final_pos_while_grasped_reward()
+
+        #grasped_reward = self.grasped_reward()
  
         task_complete_reward = self.task_complete_reward()
 
@@ -100,8 +102,9 @@ class RealGrasping(Task):
         total_reward = (#tips_to_zones +
                         gripper_to_cube +
                         tips_in_zone +
-                        cube_distance_final_pos +
-                        grasped_reward +
+                        #cube_distance_final_pos +
+                        distance_grasped +
+                        #grasped_reward +
                         task_complete_reward)
              
 
@@ -157,6 +160,14 @@ class RealGrasping(Task):
         if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
             return 100*np.linalg.norm(
                     self.cube1.get_position() - self.zone.get_position())
+        else:
+            return 0
+
+    def cube_distance_from_final_pos_while_grasped_reward(self)->float:
+        if GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]:
+            dist = 100*np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
+            reward = 100/(dist + 1)
+            return reward
         else:
             return 0
     
