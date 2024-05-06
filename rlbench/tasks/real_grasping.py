@@ -130,7 +130,7 @@ class RealGrasping(Task):
     
     def block_final_pos(self)->float:
             dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
-            total = 100*dist
+            total = 10*dist
 
             return total
 
