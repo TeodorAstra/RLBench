@@ -34,13 +34,8 @@ class TeodorExtractWithDistractorsScrambled(Task):
         
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
 
-        complete_task_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True), 
-                                    #GraspedCondition(self.robot.gripper, self.cube1),
-                                    DetectedCondition(self.distractor1, self.in_zone_sensor),
-                                    DetectedCondition(self.distractor2, self.in_zone_sensor), 
-                                    DetectedCondition(self.distractor3, self.in_zone_sensor), 
-                                    DetectedCondition(self.distractor4, self.in_zone_sensor),
-                                    DetectedCondition(self.distractor5, self.in_zone_sensor)])
+        complete_task_condition = ([DetectedCondition(self.cube1, self.in_zone_sensor, negated=True)]) 
+                               
         self.register_success_conditions(complete_task_condition)
 
 
@@ -215,13 +210,7 @@ class TeodorExtractWithDistractorsScrambled(Task):
                 return 0
             
     def task_complete_reward(self)->float:
-        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0] and
-            #GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and 
-            DetectedCondition(self.distractor1, self.in_zone_sensor).condition_met()[0] and
-            DetectedCondition(self.distractor2, self.in_zone_sensor).condition_met()[0] and
-            DetectedCondition(self.distractor3, self.in_zone_sensor).condition_met()[0] and
-            DetectedCondition(self.distractor4, self.in_zone_sensor).condition_met()[0] and
-            DetectedCondition(self.distractor5, self.in_zone_sensor).condition_met()[0] ):
+        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated=True).condition_met()[0]): 
             return 1000
         else:
             return 0
