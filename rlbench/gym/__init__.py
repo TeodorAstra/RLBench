@@ -128,7 +128,7 @@ register(
             'task_class': name_to_task_class('teodor_extract_with_distractors_scrambled'),
             'observation_mode': 'state'
         },
-        max_episode_steps=100
+        max_episode_steps=80
     )
 
 register(
@@ -136,6 +136,16 @@ register(
         entry_point='rlbench.gym:RLBenchEnv',
         kwargs={
             'task_class': name_to_task_class('real_grasping'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=60
+    )
+
+register(
+        id='real_grasping_extract-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('real_grasping_extract'),
             'observation_mode': 'state'
         },
         max_episode_steps=60

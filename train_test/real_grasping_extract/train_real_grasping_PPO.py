@@ -10,10 +10,10 @@ from stable_baselines3.common.monitor import Monitor
 from custom_wandb_callback import CustomWandbCallback
 
 # Create environment
-env = gym.make('real_grasping-state-v0', render_mode=None)
+env = gym.make('real_grasping_extract-state-v0', render_mode=None)
 
 
-task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/real_grasping.py"
+task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/real_grasping_extract.py"
 
 # Check if the file exists
 if not os.path.exists(task_code_path):
@@ -31,7 +31,7 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 1500000,
+    "total_timesteps": 2000000,
     "env_id": env,
     "n_steps": 300,
     "ent_coef": 0.01
@@ -39,7 +39,7 @@ config = {
 
 
 run = wandb.init(
-    project="real_grasping_PPO",
+    project="real_grasping_extract_PPO",
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
     #monitor_gym=True,  # auto-upload the videos of agents playing the game
@@ -63,7 +63,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"real_grasping_{current_datetime}"
+filename = f"real_grasping_extract_{current_datetime}"
 model.save(filename)
 
 run.finish()
