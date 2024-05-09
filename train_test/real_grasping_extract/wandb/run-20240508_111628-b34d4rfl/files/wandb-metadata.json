@@ -1,0 +1,208 @@
+{
+    "os": "Linux-6.5.0-28-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-05-08T09:16:29.221728",
+    "startedAt": "2024-05-08T09:16:28.692003",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodorastrand/Exjobb/Sim/RLBench/train_test/real_grasping_extract/train_real_grasping_PPO.py",
+    "codePathLocal": "train_real_grasping_PPO.py",
+    "codePath": "train_test/real_grasping_extract/train_real_grasping_PPO.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "74282d4890c09309b197caebfc9f3dd56b8486bd"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodorastrand/Exjobb/Sim/RLBench",
+    "host": "bokertov",
+    "username": "teodorastrand",
+    "executable": "/bin/python3",
+    "cpu_count": 24,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 4803.792406250001,
+        "min": 800.0,
+        "max": 4937.5
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 5344.645,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 4871.829,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5386.422,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5338.02,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5313.35,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5399.865,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5330.064,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5400.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5400.053,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5419.455,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5271.732,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5309.883,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5300.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5266.199,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5300.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5270.846,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 4300.03,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.22,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.979,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.721,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.698,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.085,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.33,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.432,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.245,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.444,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4298.169,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4300.884,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4297.801,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4296.958,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.793,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4305.205,
+            "min": 800.0,
+            "max": 4300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.3232879638672,
+            "used": 97.05390548706055
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4090",
+            "memory_total": 25757220864
+        }
+    ],
+    "memory": {
+        "total": 62.59663772583008
+    }
+}

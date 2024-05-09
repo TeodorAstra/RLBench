@@ -120,7 +120,6 @@ class RealGraspingExtract(Task):
             target_2_dist = -np.linalg.norm(self.target_2.get_position() - self.tip_2.get_position())
 
             total = target_1_dist + target_2_dist
-
             return total
         
     def tips_in_zone_reward_old(self)->float:
@@ -140,7 +139,7 @@ class RealGraspingExtract(Task):
             print("Good grasp pos")
             return reward
         else:
-            return 0:
+            return 0
     
     def block_final_pos(self)->float:
             dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())

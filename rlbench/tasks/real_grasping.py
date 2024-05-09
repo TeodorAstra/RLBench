@@ -121,7 +121,7 @@ class RealGrasping(Task):
 
             return total
         
-    def tips_in_zone_reward(self)->float:
+    def tips_in_zone_reward_old(self)->float:
         reward = 0
         if DetectedCondition(self.tip_1, self.target_1).condition_met()[0]:
             reward = reward + 10
@@ -130,6 +130,15 @@ class RealGrasping(Task):
             reward = reward + 10
             print("Tip 2 in zone")
         return reward
+
+    def tips_in_zone_reward(self)->float:
+        if (DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
+            DetectedCondition(self.tip_2, self.target_2).condition_met()[0]):
+            reward = 20
+            print("Good grasp pos")
+            return reward
+        else:
+            return 0
     
     def block_final_pos(self)->float:
             dist = -np.linalg.norm(self.cube1.get_position() - self.final_pos.get_position())
@@ -208,7 +217,7 @@ class RealGrasping(Task):
     
     def task_complete_reward(self)->float:
         if (DetectedCondition(self.cube1, self.final_pos).condition_met()[0]):
-            return 1000
+            return 3000
         else:
             return 0
         
