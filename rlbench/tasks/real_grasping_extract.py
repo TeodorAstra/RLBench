@@ -133,8 +133,10 @@ class RealGraspingExtract(Task):
         return reward
 
     def tips_in_zone_reward(self)->float:
-        if (DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
-            DetectedCondition(self.tip_2, self.target_2).condition_met()[0]):
+        if ((DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
+            DetectedCondition(self.tip_2, self.target_2).condition_met()[0]) or
+            (DetectedCondition(self.tip_1, self.target_2).condition_met()[0] and 
+            DetectedCondition(self.tip_2, self.target_1).condition_met()[0])):
             reward = 20
             print("Good grasp pos")
             return reward
