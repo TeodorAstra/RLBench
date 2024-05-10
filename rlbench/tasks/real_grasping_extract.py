@@ -222,7 +222,13 @@ class RealGraspingExtract(Task):
     def task_complete_reward(self)->float:
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated = True).condition_met()[0] and
             GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
-            return 1000
+            reward = 1000
+            if ((DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
+                DetectedCondition(self.tip_2, self.target_2).condition_met()[0]) or
+                (DetectedCondition(self.tip_1, self.target_2).condition_met()[0] and 
+                DetectedCondition(self.tip_2, self.target_1).condition_met()[0])):
+                reward = reward + 1000
+            return reward
         else:
             return 0
         
