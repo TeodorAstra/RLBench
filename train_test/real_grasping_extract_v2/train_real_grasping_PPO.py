@@ -8,12 +8,14 @@ import datetime
 import os
 from stable_baselines3.common.monitor import Monitor
 from custom_wandb_callback import CustomWandbCallback
+import torch
+torch.cuda.is_available()
 
 # Create environment
 env = gym.make('real_grasping_extract_v2-state-v0', render_mode=None)
 
 
-task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/real_grasping_extract.py"
+task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/real_grasping_extract_v2.py"
 
 # Check if the file exists
 if not os.path.exists(task_code_path):
@@ -31,7 +33,7 @@ task_code_artifact.add_file(task_code_path)
 
 config = {
     "policy_type": "MlpPolicy",
-    "total_timesteps": 3000000,
+    "total_timesteps": 2000000,
     "env_id": env,
     "n_steps": 300,
     "ent_coef": 0.01
@@ -50,7 +52,7 @@ run = wandb.init(
 run.log_artifact(task_code_artifact)
 
 #model = PPO(config["policy_type"], config["env_id"], verbose=1, n_steps=config["n_steps"], ent_coef=config["ent_coef"]) 
-model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"])
+model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"], device = "cuda")
 
 # Create Wandb callback instance
 model.learn(

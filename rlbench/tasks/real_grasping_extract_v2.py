@@ -90,9 +90,10 @@ class RealGraspingExtractV2(Task):
                             DetectedCondition(self.tip_2, self.target_1).condition_met()[0]))
 
   
-        gripper_to_cube = self.cube_distance_reward()
+        
+        #gripper_to_cube = self.cube_distance_reward()
 
-        #tips_to_zones = self.grip_zone_distance_reward() 
+        tips_to_zones = self.grip_zone_distance_reward() 
 
         tips_in_zone = self.tips_in_zone_reward()
        
@@ -108,8 +109,8 @@ class RealGraspingExtractV2(Task):
 
 
         #reward for completed task
-        total_reward = (#tips_to_zones +
-                        gripper_to_cube +
+        total_reward = (tips_to_zones +
+                        #gripper_to_cube +
                         tips_in_zone +
                         #cube_distance_final_pos +
                         distance_grasped +
