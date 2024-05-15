@@ -150,3 +150,13 @@ register(
         },
         max_episode_steps=60
     )
+
+register(
+        id='real_grasping_extract_v2-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('real_grasping_extract_v2'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=60
+    ) 
