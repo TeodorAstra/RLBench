@@ -25,6 +25,8 @@ class RealGraspingExtractV2(Task):
         self.in_zone_sensor = ProximitySensor('in_zone_sensor')
         self.target_1 = ProximitySensor('target_1')
         self.target_2 = ProximitySensor('target_2')
+        self.target_3 = ProximitySensor('target_3')
+        self.target_4 = ProximitySensor('target_4')
         #self.final_pos = ProximitySensor('final_pos')
 
         #self.tip_1 = ForceSensor('Panda_gripper_touchSensor0')
@@ -84,16 +86,20 @@ class RealGraspingExtractV2(Task):
     """        
     def reward(self) -> float:
 
-        self.GOOD_GRASP = ((DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
+        self.GOOD_GRASP = (((DetectedCondition(self.tip_1, self.target_1).condition_met()[0] and 
                             DetectedCondition(self.tip_2, self.target_2).condition_met()[0]) or
                             (DetectedCondition(self.tip_1, self.target_2).condition_met()[0] and 
-                            DetectedCondition(self.tip_2, self.target_1).condition_met()[0]))
+                            DetectedCondition(self.tip_2, self.target_1).condition_met()[0])) or
+                            ((DetectedCondition(self.tip_1, self.target_3).condition_met()[0] and 
+                            DetectedCondition(self.tip_2, self.target_4).condition_met()[0]) or
+                            (DetectedCondition(self.tip_1, self.target_4).condition_met()[0] and 
+                            DetectedCondition(self.tip_2, self.target_3).condition_met()[0])))
 
   
         
-        #gripper_to_cube = self.cube_distance_reward()
+        gripper_to_cube = self.cube_distance_reward()
 
-        tips_to_zones = self.grip_zone_distance_reward() 
+        #tips_to_zones = self.grip_zone_distance_reward() 
 
         tips_in_zone = self.tips_in_zone_reward()
        
@@ -109,8 +115,8 @@ class RealGraspingExtractV2(Task):
 
 
         #reward for completed task
-        total_reward = (tips_to_zones +
-                        #gripper_to_cube +
+        total_reward = (#tips_to_zones +
+                        gripper_to_cube +
                         tips_in_zone +
                         #cube_distance_final_pos +
                         distance_grasped +
