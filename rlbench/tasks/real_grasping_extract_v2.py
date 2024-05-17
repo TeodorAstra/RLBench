@@ -66,7 +66,8 @@ class RealGraspingExtractV2(Task):
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
             self.cube1.get_position(), self.in_zone_sensor.get_position(), 
-            self.target_1.get_position(), self.target_2.get_position()])
+            self.target_1.get_position(), self.target_2.get_position(), 
+            self.target_3.get_position(), self.target_4.get_position()])
             #self.tip_1.get_position(), self.tip_2.get_position()])
             
             
@@ -180,7 +181,7 @@ class RealGraspingExtractV2(Task):
     
     
     def cube_distance_from_center_while_grasped_reward(self)->float:
-        if (GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and self.GOOD_GRASP):
+        if (GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
             print("GRASPED")
             return 100*np.linalg.norm(
                     self.cube1.get_position() - self.in_zone_sensor.get_position())
@@ -230,13 +231,24 @@ class RealGraspingExtractV2(Task):
         else:
             return 0
     
-    def task_complete_reward(self)->float:
+    def task_complete_reward_old(self)->float:
         if (DetectedCondition(self.cube1, self.in_zone_sensor, negated = True).condition_met()[0] and
             GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0] and
             self.GOOD_GRASP):
             return 2000
         else:
             return 0
+
+    def task_complete_reward(self)->float:
+        if (DetectedCondition(self.cube1, self.in_zone_sensor, negated = True).condition_met()[0] and
+            GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
+            reward = 1000
+            if (self.GOOD_GRASP):
+                reward = reward + 1000
+            return reward
+        else:
+            return 0
+        
         
     def close_tip_reward(self):
         print(self.robot.gripper.get_open_amount())

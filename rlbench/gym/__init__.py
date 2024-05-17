@@ -159,4 +159,13 @@ register(
             'observation_mode': 'state'
         },
         max_episode_steps=60
-    ) 
+    )
+register(
+        id='teodor_grasp_extract_random_pos-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_grasp_extract_random_pos'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=60
+    )  
