@@ -34,7 +34,8 @@ config = {
     "total_timesteps": 1000000,
     "env_id": env,
     "n_steps": 250,
-    "ent_coef": 0.01
+    #"ent_coef": 0.01
+    "ent_coef": 0.0
 }
 
 
