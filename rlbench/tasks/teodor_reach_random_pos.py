@@ -10,7 +10,7 @@ from rlbench.backend.spawn_boundary import SpawnBoundary
 import numpy as np
 
 
-class TeodorGraspExtractRandomPos(Task):
+class TeodorReachRandomPos(Task):
 
     def init_task(self) -> None:
         # TODO: This is called once when a task is initialised.
@@ -23,8 +23,9 @@ class TeodorGraspExtractRandomPos(Task):
         #self.zone = Shape('zone')
 
         
-        self.in_zone_sensor = ProximitySensor('in_zone_sensor')
+        #self.in_zone_sensor = ProximitySensor('in_zone_sensor')
         self.spawn_boundary = Shape('spawn_boundary')
+        self.cube_sensor = ProximitySensor('cube_sensor')
         
         #self.final_pos = ProximitySensor('final_pos')
 
@@ -37,7 +38,7 @@ class TeodorGraspExtractRandomPos(Task):
      
         
 
-        cube_grasped = ([GraspedCondition(self.robot.gripper, self.cube1)])
+        cube_grasped = ([DetectedCondition(self.robot.gripper, self.cube_sensor)])
         self.register_success_conditions(cube_grasped)
 
 
@@ -92,7 +93,7 @@ class TeodorGraspExtractRandomPos(Task):
         #cube_distance_final_pos = self.block_final_pos()
 
         #distance_grasped = self.cube_distance_from_final_pos_while_grasped_reward()
-        distance_grasped = self.cube_distance_from_center_while_grasped_reward()
+        #distance_grasped = self.cube_distance_from_center_while_grasped_reward()
 
         #grasped_reward = self.grasped_reward()
  
@@ -220,7 +221,7 @@ class TeodorGraspExtractRandomPos(Task):
             return 0
     
     def task_complete_reward(self)->float:
-        if (GraspedCondition(self.robot.gripper, self.cube1).condition_met()[0]):
+        if (DetectedCondition(self.robot.gripper, self.cube_sensor).condition_met()[0]):
             return 1000
         else:
             return 0

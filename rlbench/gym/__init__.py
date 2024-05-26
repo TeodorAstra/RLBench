@@ -82,6 +82,17 @@ register(
     )
 
 register(
+        id='teodor_zone_pick_and_place-vision-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_zone_pick_and_place'),
+            'observation_mode': 'vision'
+        },
+        max_episode_steps=50
+    )
+
+
+register(
         id='teodor_zone_pick_and_place_v2-state-v0',
         entry_point='rlbench.gym:RLBenchEnv',
         kwargs={
@@ -175,6 +186,16 @@ register(
         entry_point='rlbench.gym:RLBenchEnv',
         kwargs={
             'task_class': name_to_task_class('teodor_extract_scrambled_v3'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=60
+    )  
+
+register(
+        id='teodor_reach_random_pos-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_reach_random_pos'),
             'observation_mode': 'state'
         },
         max_episode_steps=60

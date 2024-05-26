@@ -90,6 +90,9 @@ class TeodorExtractScrambledV3(Task):
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
         return np.concatenate([
+            self.cube1.get_position(), self.in_zone_sensor.get_position()])
+    """
+        return np.concatenate([
             self.cube1.get_position(), self.in_zone_sensor.get_position(),
             self.distractor1.get_position(),
             self.distractor2.get_position(),
@@ -98,7 +101,7 @@ class TeodorExtractScrambledV3(Task):
             self.distractor5.get_position(),
             #self.target.get_position()
             ])
-            
+    """        
             #self.tip_1.get_position(), self.tip_2.get_position()])
             
             

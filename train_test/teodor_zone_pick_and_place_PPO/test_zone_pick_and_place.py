@@ -21,7 +21,9 @@ obs = env.reset()
 while True:
 
     action, _states = model.predict(obs, deterministic=False)
+    print(action)
     obs, reward, terminate, _ = env.step(action)
+    
 
 
     print(reward)
