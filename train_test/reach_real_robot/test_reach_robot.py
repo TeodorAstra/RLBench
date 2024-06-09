@@ -21,6 +21,7 @@ while True:
     action, _states = model.predict(obs, deterministic=False)
     obs, reward, terminate, _ = env.step(action)
     print(reward)
+    print(obs)
     #env.render()  # Note: rendering increases step time.
     if terminate:
         print('Episode Terminated. Resetting...')
