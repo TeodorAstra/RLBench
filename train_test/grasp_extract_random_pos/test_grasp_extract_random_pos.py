@@ -9,7 +9,7 @@ from stable_baselines3 import PPO
 env = gym.make('teodor_grasp_extract_random_pos-state-v0', render_mode="human")
 
 # Load the trained agent
-model = PPO.load("random_pos_PPO_20240524_0343", print_system_info=True)
+model = PPO.load("random_pos_PPO_20240525_0121", print_system_info=True)
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
@@ -20,7 +20,7 @@ obs = env.reset()
 
 while True:
 
-    action, _states = model.predict(obs, deterministic=False)
+    action, _states = model.predict(obs, deterministic=True)
     obs, reward, terminate, _ = env.step(action)
 
 

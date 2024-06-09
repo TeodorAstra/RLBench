@@ -8,12 +8,14 @@ import datetime
 import os
 from stable_baselines3.common.monitor import Monitor
 from custom_wandb_callback import CustomWandbCallback
+import torch
+torch.cuda.is_available()
 
 # Create environment
-env = gym.make('teodor_remove_from_zone-state-v0', render_mode=None)
+env = gym.make('teodor_vision_zone-vision-v0', render_mode=None)
 
 
-task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/teodor_remove_from_zone.py"
+task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/teodor_vision_zone.py"
 
 # Check if the file exists
 if not os.path.exists(task_code_path):
@@ -30,16 +32,17 @@ task_code_artifact.add_file(task_code_path)
 
 
 config = {
-    "policy_type": "MlpPolicy",
-    "total_timesteps": 2000000,
+    "policy_type": "MultiInputPolicy",
+    "total_timesteps": 500000,
     "env_id": env,
-    "n_steps": 200,
+    "n_steps": 250,
+    #"ent_coef": 0.01
     "ent_coef": 0.0
 }
 
 
 run = wandb.init(
-    project="teodor_remove_from_zone_PPO",
+    project="vision_zone_PPO",
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
     #monitor_gym=True,  # auto-upload the videos of agents playing the game
@@ -50,7 +53,7 @@ run = wandb.init(
 run.log_artifact(task_code_artifact)
 
 #model = PPO(config["policy_type"], config["env_id"], verbose=1, n_steps=config["n_steps"], ent_coef=config["ent_coef"]) 
-model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"])
+model = PPO(config["policy_type"], config["env_id"], verbose=1, tensorboard_log=f"runs/{run.id}", n_steps=config["n_steps"], ent_coef=config["ent_coef"], device = "cuda")
 
 # Create Wandb callback instance
 model.learn(
@@ -63,7 +66,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"remove_from_zone_PPO{current_datetime}"
+filename = f"vision_zone_{current_datetime}"
 model.save(filename)
 
 run.finish()

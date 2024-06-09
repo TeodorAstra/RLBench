@@ -10,10 +10,10 @@ from stable_baselines3.common.monitor import Monitor
 from custom_wandb_callback import CustomWandbCallback
 
 # Create environment
-env = gym.make('teodor_remove_from_zone-state-v0', render_mode=None)
+env = gym.make('teodor_extract_with_distractors_f3-state-v0', render_mode='human')
 
 
-task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/teodor_remove_from_zone.py"
+task_code_path = "/home/teodor/Exjobb/Sim/RLBench/rlbench/tasks/teodor_extract_with_distractors_f3.py"
 
 # Check if the file exists
 if not os.path.exists(task_code_path):
@@ -33,13 +33,13 @@ config = {
     "policy_type": "MlpPolicy",
     "total_timesteps": 2000000,
     "env_id": env,
-    "n_steps": 200,
+    "n_steps": 400,
     "ent_coef": 0.0
 }
 
 
 run = wandb.init(
-    project="teodor_remove_from_zone_PPO",
+    project="teodor_extract_with_distractors_PPO_formation_3",
     config=config,
     sync_tensorboard=True,  # auto-upload sb3's tensorboard metrics
     #monitor_gym=True,  # auto-upload the videos of agents playing the game
@@ -63,7 +63,7 @@ model.learn(
 
 
 current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"remove_from_zone_PPO{current_datetime}"
+filename = f"extract_with_distractors_{current_datetime}_f3"
 model.save(filename)
 
 run.finish()

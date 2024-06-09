@@ -9,7 +9,7 @@ from stable_baselines3 import PPO
 env = gym.make('teodor_reach_random_pos-state-v0', render_mode="human")
 
 # Load the trained agent
-model = PPO.load("reach_random_pos_PPO_20240524_1855", print_system_info=True)
+model = PPO.load("reach_random_pos_PPO_20240524_2007", print_system_info=True)
 
 # Evaluate the agent
 #mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)

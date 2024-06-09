@@ -123,6 +123,27 @@ register(
     )
 
 register(
+        id='teodor_extract_with_distractors_f2-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_extract_with_distractors_f2'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=80
+    )
+
+register(
+        id='teodor_extract_with_distractors_f3-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_extract_with_distractors_f3'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=80
+    )
+
+
+register(
         id='teodor_object_iso-state-v0',
         entry_point='rlbench.gym:RLBenchEnv',
         kwargs={
@@ -200,3 +221,13 @@ register(
         },
         max_episode_steps=60
     )  
+
+register(
+        id='teodor_vision_zone-vision-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('teodor_vision_zone'),
+            'observation_mode': 'vision'
+        },
+        max_episode_steps=50
+    )
