@@ -1,0 +1,200 @@
+{
+    "os": "Linux-6.5.0-35-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-06-09T12:10:31.736977",
+    "startedAt": "2024-06-09T12:10:31.199967",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/teodorastrand/Exjobb/Sim/RLBench/train_test/reach_real_robot/train_reach_real_robot.py",
+    "codePathLocal": "train_reach_real_robot.py",
+    "codePath": "train_test/reach_real_robot/train_reach_real_robot.py",
+    "git": {
+        "remote": "https://github.com/TeodorAstra/RLBench.git",
+        "commit": "1306b69122f7665d08dfc65d5a4c443427d4bd9c"
+    },
+    "email": "teodor.astrand@gmail.com",
+    "root": "/home/teodorastrand/Exjobb/Sim/RLBench",
+    "host": "bokertov",
+    "username": "teodorastrand",
+    "executable": "/bin/python3",
+    "cpu_count": 24,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 3267.6575000000003,
+        "min": 800.0,
+        "max": 4937.5
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 5399.843,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5379.592,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5399.936,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5398.347,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5399.982,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5399.874,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5275.778,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5290.292,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 5288.302,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5275.853,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5276.005,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 5275.791,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 4298.765,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4301.676,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.354,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4289.661,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4274.324,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4301.049,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.37,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 4299.777,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.3232879638672,
+            "used": 251.8097038269043
+        }
+    },
+    "memory": {
+        "total": 62.600345611572266
+    }
+}

@@ -231,3 +231,14 @@ register(
         },
         max_episode_steps=50
     )
+
+
+register(
+        id='reach_real_robot-state-v0',
+        entry_point='rlbench.gym:RLBenchEnv',
+        kwargs={
+            'task_class': name_to_task_class('reach_real_robot'),
+            'observation_mode': 'state'
+        },
+        max_episode_steps=40
+    )
